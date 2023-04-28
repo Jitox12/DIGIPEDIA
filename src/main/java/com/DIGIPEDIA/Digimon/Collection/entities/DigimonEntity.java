@@ -20,8 +20,9 @@ public class DigimonEntity {
     private Integer digimonMemory;
     @Column(name = "digimon_name")
     private String digimonName;
+    @Lob
     @Column(name = "digimon_img")
-    private String digimonImg;
+    private byte[] digimonImg;
 
     @Column(name = "digimon_passive")
     private String digimonPassive;

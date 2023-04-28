@@ -23,5 +23,4 @@ public class SkillTypeEntity {
 
     @OneToMany(mappedBy = "skill_type")
     private List<SkillEntity> skills;
-
 }

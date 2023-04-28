@@ -21,8 +21,9 @@ public class DigimonTypeEntity {
     @Column(name = "digimon_type_name")
     private String digimonTypeName;
 
+    @Lob
     @Column(name = "digimon_type_img")
-    private String digimonTYpeImg;
+    private byte[] digimonTYpeImg;
     @Column(name = "digimon_attribute_id")
     private Integer digimonAttributeId;
 
