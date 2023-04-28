@@ -4,10 +4,12 @@ import com.DIGIPEDIA.Digimon.Collection.dao.daoImpl.AttributeDaoImpl;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.GAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.AttributeMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.AttributeService;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,40 +26,57 @@ public class AttributeServiceImpl implements AttributeService {
 
     @Override
     public void createAttribute(CAttributeDto cAttributeDto) {
-        attributeDao.createAttributeDao(cAttributeDto);
+        try{
+            attributeDao.createAttributeDao(cAttributeDto);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public GAttributeDto findAttributeById(Integer attributeId) {
-        AttributeEntity attribute;
-        GAttributeDto attributeDto;
+        try {
+            AttributeEntity attribute;
+            GAttributeDto attributeDto;
 
-        attribute = attributeDao.findAttributeByIdDao(attributeId);
-        attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
+            attribute = attributeDao.findAttributeByIdDao(attributeId);
+            attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
 
-        return attributeDto;
+            return attributeDto;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public GAttributeDto findAttributeByName(String attributeName) {
-        AttributeEntity attribute;
-        GAttributeDto attributeDto;
+        try {
+            AttributeEntity attribute;
+            GAttributeDto attributeDto;
 
-        attribute = attributeDao.findAttributeByNameDao(attributeName);
-        attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
+            attribute = attributeDao.findAttributeByNameDao(attributeName);
+            attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
 
-        return attributeDto;
+            return attributeDto;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<GAttributeDto> findAllAttribute() {
-        List<AttributeEntity> attributeList;
-        List<GAttributeDto> attributeDtoList;
+        try{
+            List<AttributeEntity> attributeList;
+            List<GAttributeDto> attributeDtoList;
 
-        attributeList = attributeDao.findAllAttribute();
+            attributeList = attributeDao.findAllAttribute();
 
-        attributeDtoList = attributeList.stream().map(attributeMapper::AttributeEntityToGAttributeDto).collect(Collectors.toList());
+            attributeDtoList = attributeList.stream().map(attributeMapper::AttributeEntityToGAttributeDto).collect(Collectors.toList());
 
-        return attributeDtoList;
+            return attributeDtoList;
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 }
