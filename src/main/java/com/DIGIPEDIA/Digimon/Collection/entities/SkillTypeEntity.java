@@ -19,7 +19,7 @@ public class SkillTypeEntity {
     private Integer skillEntityId;
 
     @Column(name = "skill_type_name")
-    private String skilTypeName;
+    private String skillTypeName;
 
     @OneToMany(mappedBy = "skill_type")
     private List<SkillEntity> skills;

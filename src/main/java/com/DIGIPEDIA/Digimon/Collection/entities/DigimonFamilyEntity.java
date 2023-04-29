@@ -17,12 +17,11 @@ public class DigimonFamilyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "digimon_family_id")
-    private Integer DigimonFamilyId;
+    private Integer digimonFamilyId;
 
     @Column(name = "digimon_family_name")
-    private String DigimonFamilyName;
+    private String digimonFamilyName;
 
     @OneToMany(mappedBy = "digimon_family")
     private List<DigimonEntity> digimons;
-
 }

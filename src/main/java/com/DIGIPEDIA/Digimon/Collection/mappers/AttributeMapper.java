@@ -12,19 +12,16 @@ import java.util.List;
 
 @Mapper(componentModel = "Spring")
 public interface AttributeMapper {
-    AttributeMapper INSTANCE = Mappers.getMapper(AttributeMapper.class);
+    AttributeMapper ATTRIBUTE_MAPPER = Mappers.getMapper(AttributeMapper.class);
 
-    List<String> digimonTypeTodigimonTypeName(List<DigimonTypeEntity> digimonTypeList);
-    String digimonTypeTodigimonTypeName(DigimonTypeEntity digimonType);
+    List<String> digimonTypeToDigimonTypeName(List<DigimonTypeEntity> digimonTypeList);
+    String digimonTypeToDigimonTypeName(DigimonTypeEntity digimonType);
 
     List<String> SkillToSkillName(List<SkillEntity> skillList);
     String SkillToSkillName(SkillEntity skill);
 
     @Mapping(source = "attributeId", target = "attributeIdDto")
     @Mapping(source = "attributeName", target = "attributeNameDto")
-    @Mapping(source = "digimonTypes", target = "digimonTypesNameDto")
     @Mapping(source = "skills", target = "skillsNameDto")
-    GAttributeDto AttributeEntityToGAttributeDto(AttributeEntity attribute);
-
-
+    GAttributeDto attributeEntityToGAttributeDto(AttributeEntity attribute);
 }

@@ -20,39 +20,15 @@ public class DigimonTypeEntity {
 
     @Column(name = "digimon_type_name")
     private String digimonTypeName;
-
-    @Lob
-    @Column(name = "digimon_type_img")
-    private byte[] digimonTYpeImg;
     @Column(name = "digimon_attribute_id")
     private Integer digimonAttributeId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "digimon_attribute_id",insertable = false, updatable = false)
-    private AttributeEntity attribute;
-
-    @OneToMany(mappedBy = "digimon_type")
-    private List<DigimonEntity> digimons;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "digimon_type_attribute",
+            joinColumns = {@JoinColumn(name = "digimon_type_id", referencedColumnName = "digimon_type_id")},
+            inverseJoinColumns = {@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")})
+    private List<DigimonTypeAttributeEntity> digimonTypeAttribute;
 
 
 

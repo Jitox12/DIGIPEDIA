@@ -4,7 +4,6 @@ import com.DIGIPEDIA.Digimon.Collection.dao.daoImpl.AttributeDaoImpl;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.GAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
-import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.AttributeMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.AttributeService;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ public class AttributeServiceImpl implements AttributeService {
             GAttributeDto attributeDto;
 
             attribute = attributeDao.findAttributeByIdDao(attributeId);
-            attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
+            attributeDto = attributeMapper.attributeEntityToGAttributeDto(attribute);
 
             return attributeDto;
 
@@ -56,7 +55,7 @@ public class AttributeServiceImpl implements AttributeService {
             GAttributeDto attributeDto;
 
             attribute = attributeDao.findAttributeByNameDao(attributeName);
-            attributeDto = attributeMapper.AttributeEntityToGAttributeDto(attribute);
+            attributeDto = attributeMapper.attributeEntityToGAttributeDto(attribute);
 
             return attributeDto;
         } catch (IOException e) {
@@ -72,7 +71,7 @@ public class AttributeServiceImpl implements AttributeService {
 
             attributeList = attributeDao.findAllAttribute();
 
-            attributeDtoList = attributeList.stream().map(attributeMapper::AttributeEntityToGAttributeDto).collect(Collectors.toList());
+            attributeDtoList = attributeList.stream().map(attributeMapper::attributeEntityToGAttributeDto).collect(Collectors.toList());
 
             return attributeDtoList;
         }catch (IOException e){

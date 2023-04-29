@@ -42,18 +42,17 @@ public class AttributeDaoImpl implements AttributeDao {
     @Override
     public AttributeEntity findAttributeByIdDao(Integer attributeId) throws IOException{
         AttributeEntity attribute;
-        attribute = attributeRepository.findByAttributeId(attributeId);
-        if (Objects.isNull(attribute)){
-            throw new NotFoundException("attribute with id: ".concat(String.valueOf(attributeId)));
-        }
+        attribute = attributeRepository.findByAttributeId(attributeId)
+                .orElseThrow(()->  new NotFoundException("attribute with id: ".concat(String.valueOf(attributeId))));
+
         return attribute;
     }
 
     @Override
     public AttributeEntity findAttributeByNameDao(String attributeName) throws IOException{
         AttributeEntity attribute;
-
-        attribute = attributeRepository.findByAttributeName(attributeName);
+        attribute = attributeRepository.findByAttributeName(attributeName)
+                .orElseThrow(()->  new NotFoundException("attribute with name: ".concat(attributeName)));
 
         return attribute;
     }

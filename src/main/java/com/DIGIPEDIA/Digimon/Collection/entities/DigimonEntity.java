@@ -3,6 +3,7 @@ package com.DIGIPEDIA.Digimon.Collection.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,17 +27,22 @@ public class DigimonEntity {
 
     @Column(name = "digimon_passive")
     private String digimonPassive;
-    @Column(name = "digimon_type_id")
-    private Integer digimonTypeId;
 
     @Column(name = "digimon_family_id")
     private Integer digimonFamilyId;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "digimon_skill",
+            joinColumns = {@JoinColumn(name = "digimon_id", referencedColumnName = "digimon_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")})
+    private List<SkillEntity> skills;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "digimon_family_id",insertable = false, updatable = false)
     private DigimonFamilyEntity digimon_family;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "digimon_type_id",insertable = false, updatable = false)
-    private DigimonFamilyEntity digimon_type;
+    @JoinColumn(name = "digimon_type_attribute_id",insertable = false, updatable = false)
+    private DigimonTypeAttributeEntity digimon_type_attribute;
 }
