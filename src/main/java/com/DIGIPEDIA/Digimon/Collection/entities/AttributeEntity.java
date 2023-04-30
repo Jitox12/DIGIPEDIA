@@ -21,6 +21,9 @@ public class AttributeEntity {
 
     @Column(name = "attribute_name")
     private String attributeName;
+    @Lob
+    @Column(name = "attribute_img")
+    private byte[] attributeImg;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -31,6 +34,4 @@ public class AttributeEntity {
 
     @OneToMany(mappedBy = "attribute")
     private List<SkillEntity> skills;
-
-
 }

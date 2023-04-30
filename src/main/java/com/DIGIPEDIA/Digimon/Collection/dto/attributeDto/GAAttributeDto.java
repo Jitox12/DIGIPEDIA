@@ -1,7 +1,5 @@
 package com.DIGIPEDIA.Digimon.Collection.dto.attributeDto;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.digimonAttributeDto.GDigimonTypeAttributeDto;
-import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.GSkillDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GAttributeDto {
+public class GAAttributeDto {
     private Integer attributeIdDto;
     private String attributeNameDto;
-    private List<GDigimonTypeAttributeDto> digimonTypeAttributeDto;
-    private List<GSkillDto> skillsDto;
+    private List<String> digimonTypesNameDto;
+    private List<String> skillsNameDto;
 }

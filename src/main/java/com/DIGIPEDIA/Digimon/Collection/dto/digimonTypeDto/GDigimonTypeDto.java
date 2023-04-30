@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GDigimonTypeEntity {
+public class GDigimonTypeDto {
 
     private Integer digimonTypeIdDto;
     private String digimonTypeNameDto;

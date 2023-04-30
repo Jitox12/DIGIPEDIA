@@ -15,8 +15,8 @@ import java.util.List;
 public class SkillTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "skill_entity_id")
-    private Integer skillEntityId;
+    @Column(name = "skill_type_id")
+    private Integer skillTypeId;
 
     @Column(name = "skill_type_name")
     private String skillTypeName;
