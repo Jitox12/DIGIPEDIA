@@ -11,4 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CAttributeDto {
     private String attributeNameDto;
+    private byte[] attributeImgDto;
 }

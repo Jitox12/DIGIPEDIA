@@ -1,6 +1,5 @@
 package com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

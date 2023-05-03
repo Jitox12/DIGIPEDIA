@@ -9,7 +9,6 @@ import java.util.List;
 public interface DigimonFamilyService {
 
     public void createDigimonFamily(CDigimonFamilyDto cDigimonFamilyDto);
-
     public GADigimonFamilyDto findDigimonFamilyById(Integer digimonFamilyId);
     public GADigimonFamilyDto findDigimonFamilyByName(String digimonFamilyName);
     public List<GDigimonFamilyDto> findAllDigimonFamily();

@@ -1,4 +1,4 @@
-package com.DIGIPEDIA.Digimon.Collection.dto.digimonAttributeDto;
+package com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GDigimonTypeAttributeDto {
-
-    private String digimonTypeAttributeIdDto;
+public class CDigimonTypeAttributeDto {
     private Integer digimonTypeIdDto;
     private Integer attributeIdDto;
+    private byte[] digimonTypeAttributeImgDto;
     private String digimonTypeAttributeNameDto;
-    private byte[] digimonTypeAttributeImg;
 }

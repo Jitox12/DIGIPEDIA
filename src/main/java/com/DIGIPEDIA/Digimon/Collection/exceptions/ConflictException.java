@@ -1,7 +1,6 @@
 package com.DIGIPEDIA.Digimon.Collection.exceptions;
 
 
-import java.util.List;
 
 public class ConflictException extends RuntimeException{
 

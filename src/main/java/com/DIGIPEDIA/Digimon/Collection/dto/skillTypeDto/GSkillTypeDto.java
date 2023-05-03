@@ -8,5 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 public class GSkillTypeDto {
     private Integer skillTypeIdDto;
-    private String skillTypeName;
+    private String skillTypeNameDto;
 }

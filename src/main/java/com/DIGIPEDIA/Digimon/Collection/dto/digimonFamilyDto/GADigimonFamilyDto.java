@@ -1,6 +1,6 @@
 package com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ import java.util.List;
 public class GADigimonFamilyDto {
     private Integer digimonFamilyIdDto;
     private String digimonFamilyNameDto;
-    private List<GADigimonDto> digimonsDto;
+    private List<GDigimonDto> digimonsDto;
 }

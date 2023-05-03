@@ -1,6 +1,6 @@
-package com.DIGIPEDIA.Digimon.Collection.dto.digimonAttributeDto;
+package com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
 import lombok.*;
 
 import java.util.List;
@@ -12,9 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GADigimonTypeAttributeDto {
     private String digimonTypeAttributeIdDto;
-    private Integer digimonTypeIdDto;
-    private Integer attributeIdDto;
     private String digimonTypeAttributeNameDto;
     private byte[] digimonTypeAttributeImgDto;
-    private List<GADigimonDto> digimonsDto;
+    private List<GDigimonDto> digimonsDto;
 }

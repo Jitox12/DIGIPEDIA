@@ -1,8 +1,6 @@
 package com.DIGIPEDIA.Digimon.Collection.dao;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto.CDigimonFamilyDto;
-import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonFamilyEntity;
 
 import java.io.IOException;

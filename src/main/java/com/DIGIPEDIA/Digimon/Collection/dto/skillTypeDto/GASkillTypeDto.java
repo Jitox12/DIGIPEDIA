@@ -14,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class GASkillTypeDto {
     private Integer skillTypeIdDto;
-    private String skillTypeName;
+    private String skillTypeNameDto;
     private List<GSkillDto> skillsDto;
 }

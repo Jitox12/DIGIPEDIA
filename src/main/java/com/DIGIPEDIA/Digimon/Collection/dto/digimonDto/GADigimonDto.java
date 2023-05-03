@@ -1,6 +1,7 @@
 package com.DIGIPEDIA.Digimon.Collection.dto.digimonDto;
 
-import com.DIGIPEDIA.Digimon.Collection.dto.digimonAttributeDto.GDigimonTypeAttributeDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.GDigimonTypeAttributeDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto.GDigimonFamilyDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.GSkillDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,7 @@ public class GADigimonDto {
     private String digimonNameDto;
     private byte[] digimonImgDto;
     private String digimonPassiveDto;
-    private String digimonFamilyDto;
+    private GDigimonFamilyDto digimonFamilyDto;
     private GDigimonTypeAttributeDto digimonTypeAttributeDto;
     private List<GSkillDto> skillsDto;
 }

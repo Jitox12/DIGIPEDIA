@@ -3,6 +3,7 @@ package com.DIGIPEDIA.Digimon.Collection.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "digimon_type_attribute")
-public class DigimonTypeAttributeEntity {
+public class DigimonTypeAttributeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "digimon_type_attribute_id")
@@ -30,5 +31,4 @@ public class DigimonTypeAttributeEntity {
 
     @OneToMany(mappedBy = "digimon_type_attribute")
     private List<DigimonEntity> digimons;
-
 }

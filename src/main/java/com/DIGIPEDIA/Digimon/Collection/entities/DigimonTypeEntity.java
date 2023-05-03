@@ -20,8 +20,6 @@ public class DigimonTypeEntity {
 
     @Column(name = "digimon_type_name")
     private String digimonTypeName;
-    @Column(name = "digimon_attribute_id")
-    private Integer digimonAttributeId;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -29,8 +27,4 @@ public class DigimonTypeEntity {
             joinColumns = {@JoinColumn(name = "digimon_type_id", referencedColumnName = "digimon_type_id")},
             inverseJoinColumns = {@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")})
     private List<DigimonTypeAttributeEntity> digimonTypeAttribute;
-
-
-
-
 }

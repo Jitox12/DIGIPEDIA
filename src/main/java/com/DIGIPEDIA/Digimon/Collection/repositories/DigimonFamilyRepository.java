@@ -9,6 +9,5 @@ import java.util.Optional;
 public interface DigimonFamilyRepository extends JpaRepository<DigimonFamilyEntity, Integer> {
     Optional<DigimonFamilyEntity> findByDigimonFamilyId(Integer digimonFamilyId);
     Optional<DigimonFamilyEntity> findByDigimonFamilyName(String digimonFamilyName);
-
     List<DigimonFamilyEntity> findAll();
 }

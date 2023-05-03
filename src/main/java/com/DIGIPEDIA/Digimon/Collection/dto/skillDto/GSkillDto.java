@@ -9,8 +9,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GSkillDto {
-    private Integer skillId;
-    private String skillName;
-    private String skillDescription;
+    private Integer skillIdDto;
+    private String skillNameDto;
+    private String skillDescriptionDto;
+    private GSkillTypeDto skillTypeDto;
     private GAttributeDto attributeDto;
 }

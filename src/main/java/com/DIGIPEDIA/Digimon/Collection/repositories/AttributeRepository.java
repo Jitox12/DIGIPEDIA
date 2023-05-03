@@ -10,7 +10,6 @@ public interface AttributeRepository extends JpaRepository<AttributeEntity, Inte
 
     Optional<AttributeEntity> findByAttributeId(Integer attributeId);
     Optional<AttributeEntity> findByAttributeName(String attributeName);
-
     List<AttributeEntity> findAll();
 
 }

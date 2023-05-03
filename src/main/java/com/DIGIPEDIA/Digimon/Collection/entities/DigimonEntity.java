@@ -31,6 +31,9 @@ public class DigimonEntity {
     @Column(name = "digimon_family_id")
     private Integer digimonFamilyId;
 
+    @Column(name = "digimon_type_attribute_id")
+    private Integer digimonTypeAttributeId;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "digimon_skill",

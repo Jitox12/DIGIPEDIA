@@ -30,7 +30,7 @@ public class AttributeEntity {
             name = "digimon_type_attribute",
             joinColumns = {@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")},
             inverseJoinColumns = {@JoinColumn(name = "digimon_type_id", referencedColumnName = "digimon_type_id")})
-    private List<DigimonTypeAttributeEntity> digimonTypeAttribute;
+    private List<DigimonTypeAttributeEntity> digimonTypesAttribute;
 
     @OneToMany(mappedBy = "attribute")
     private List<SkillEntity> skills;

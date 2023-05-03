@@ -41,7 +41,7 @@ public class DigimonFamilyDaoImpl implements DigimonFamilyDao {
     public DigimonFamilyEntity findDigimonFamilyByIdDao(Integer digimonFamilyId) throws IOException {
         DigimonFamilyEntity digimonFamily;
         digimonFamily = digimonFamilyRepository.findByDigimonFamilyId(digimonFamilyId)
-                .orElseThrow(()-> new BadRequestException("attribute with id ".concat(String.valueOf(digimonFamilyId))));
+                .orElseThrow(()-> new BadRequestException("Digimon Family id: ".concat(String.valueOf(digimonFamilyId))));
 
         return digimonFamily;
     }
@@ -50,7 +50,7 @@ public class DigimonFamilyDaoImpl implements DigimonFamilyDao {
     public DigimonFamilyEntity findDigimonFamilyByNameDao(String digimonFamilyName) throws IOException {
         DigimonFamilyEntity digimonFamily;
         digimonFamily = digimonFamilyRepository.findByDigimonFamilyName(digimonFamilyName)
-                .orElseThrow(()-> new BadRequestException("attribute with id ".concat(digimonFamilyName)));
+                .orElseThrow(()-> new BadRequestException("Digimon Family Name: ".concat(digimonFamilyName)));
 
         return digimonFamily;
     }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DigimonFamilyServiceImpl implements DigimonFamilyService {
@@ -33,7 +34,7 @@ public class DigimonFamilyServiceImpl implements DigimonFamilyService {
 
     @Override
     public GADigimonFamilyDto findDigimonFamilyById(Integer digimonFamilyId) {
-        try{
+        try {
             DigimonFamilyEntity digimonFamily;
             GADigimonFamilyDto digimonFamilyDto;
             digimonFamily = digimonFamilyDao.findDigimonFamilyByIdDao(digimonFamilyId);
@@ -41,18 +42,43 @@ public class DigimonFamilyServiceImpl implements DigimonFamilyService {
 
             return digimonFamilyDto;
 
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public GADigimonFamilyDto findDigimonFamilyByName(String digimonFamilyName) {
-        return null;
+        try {
+            DigimonFamilyEntity digimonFamily;
+            GADigimonFamilyDto digimonFamilyDto;
+            digimonFamily = digimonFamilyDao.findDigimonFamilyByNameDao(digimonFamilyName);
+            digimonFamilyDto = digimonFamilyMapper.digimonTypetoGADigimonTypeDto(digimonFamily);
+
+            return digimonFamilyDto;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<GDigimonFamilyDto> findAllDigimonFamily() {
-        return null;
+        try {
+            List<DigimonFamilyEntity> digimonFamilyList;
+            List<GDigimonFamilyDto> digimonFamilyDtoList;
+
+            digimonFamilyList = digimonFamilyDao.findAllDigimonFamilyDao();
+
+            digimonFamilyDtoList = digimonFamilyList.stream()
+                    .map(digimonFamilyMapper::digimonTypetoGDigimonTypeDto)
+                    .collect(Collectors.toList());
+
+            return digimonFamilyDtoList;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
