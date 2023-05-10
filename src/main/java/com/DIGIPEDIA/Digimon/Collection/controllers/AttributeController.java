@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/attribute")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class AttributeController {
 
     private final AttributeService attributeService;
@@ -22,9 +23,11 @@ public class AttributeController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<String> createAttributeController(@RequestBody CAttributeDto attributeDto) {
+        String created = "CREATED ATTRIBUTE";
+
         attributeService.createAttribute(attributeDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("CREATED");
+        return ResponseEntity.status(HttpStatus.CREATED).body("{CREATED}");
     }
 
     @GetMapping(value = "/findbyid/{attributeId}")
