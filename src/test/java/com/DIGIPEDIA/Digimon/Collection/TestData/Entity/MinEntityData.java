@@ -1,11 +1,12 @@
-package com.DIGIPEDIA.Digimon.Collection.TestData;
+package com.DIGIPEDIA.Digimon.Collection.TestData.Entity;
 
+import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
 import com.DIGIPEDIA.Digimon.Collection.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MinEntityData extends EntityTestData {
+public class MinEntityData extends TestData {
 
     //data corresponding to GDTO, Minimum for entity creation
 
@@ -13,39 +14,43 @@ public class MinEntityData extends EntityTestData {
 
         return SkillTypeEntity.builder()
                 .skillTypeId(1)
-                .skillTypeName("Normal")
+                .skillTypeName(skillTypeName)
                 .build();
     }
+
     public static AttributeEntity minCreateAttributeEntity() {
 
         return AttributeEntity
                 .builder()
                 .attributeId(1)
-                .attributeName("Fuego")
+                .attributeName(attributeName)
                 .attributeImg(img)
                 .build();
     }
+
     public static DigimonTypeAttributeEntity minCreateDigimonTypeAttributeEntity() {
         return DigimonTypeAttributeEntity
                 .builder()
                 .digimonTypeAttributeId(1)
                 .digimonTypeId(1)
                 .attributeId(1)
-                .digimonTypeAttributeName("Virus")
+                .digimonTypeAttributeName(digimonTypeName)
                 .digimonTypeAttributeImg(img)
                 .build();
     }
+
     public static DigimonFamilyEntity minCreateDigimonFamilyEntity() {
         return DigimonFamilyEntity
                 .builder()
                 .digimonFamilyId(1)
-                .digimonFamilyName("Campeon")
+                .digimonFamilyName(digimonFamilyName)
                 .build();
     }
-    public static DigimonTypeEntity minCreateDigimonTypeEntity(){
+
+    public static DigimonTypeEntity minCreateDigimonTypeEntity() {
         return DigimonTypeEntity.builder()
                 .digimonTypeId(1)
-                .digimonTypeName("Virus")
+                .digimonTypeName(digimonTypeName)
                 .build();
     }
 
@@ -58,8 +63,8 @@ public class MinEntityData extends EntityTestData {
 
         skillList.add(SkillEntity.builder()
                 .skillId(1)
-                .skillName("Placaje")
-                .skillDescription("Golpe")
+                .skillName(skillName)
+                .skillDescription(skillDescription)
                 .skillTypeId(1)
                 .skill_type(skillType)
                 .attribute(attribute)
@@ -67,6 +72,7 @@ public class MinEntityData extends EntityTestData {
         );
         return skillList;
     }
+
     public static List<DigimonEntity> minCreateDigimonEntityList() {
         List<DigimonEntity> digimonList = new ArrayList<>();
         DigimonTypeAttributeEntity digimonTypeAttribute = minCreateDigimonTypeAttributeEntity();
@@ -76,9 +82,9 @@ public class MinEntityData extends EntityTestData {
                 .builder()
                 .digimonFamilyId(1)
                 .digimonMemory(5)
-                .digimonName("Agumon")
+                .digimonName(digimonName)
                 .digimonImg(img)
-                .digimonPassive("Fueguito")
+                .digimonPassive(digimonPassive)
                 .digimonFamilyId(1)
                 .digimon_family(digimonFamily)
                 .digimon_type_attribute(digimonTypeAttribute)
@@ -87,6 +93,7 @@ public class MinEntityData extends EntityTestData {
         );
         return digimonList;
     }
+
     public static List<DigimonTypeAttributeEntity> minCreateDigimonTypeAttributeEntityList() {
         List<DigimonTypeAttributeEntity> digimonTypeAttributeList = new ArrayList<>();
 
@@ -94,7 +101,7 @@ public class MinEntityData extends EntityTestData {
                 .digimonTypeAttributeId(1)
                 .digimonTypeId(1)
                 .attributeId(1)
-                .digimonTypeAttributeName("Virus")
+                .digimonTypeAttributeName(digimonTypeName)
                 .digimonTypeAttributeImg(img)
                 .build()
         );

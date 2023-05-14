@@ -41,6 +41,8 @@ public class DigimonDaoImpl implements DigimonDao {
 
        digimonSaved = digimonRepository.save(digimon);
         try{
+
+
             digimonSkillDao.createDigimonSkillDao(digimonSaved.getDigimonId(), cDigimonDto.getSkillIdDto());
         }catch (IOException e){
             throw new RuntimeException(e);

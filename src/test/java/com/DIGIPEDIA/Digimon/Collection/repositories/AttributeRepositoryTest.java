@@ -1,9 +1,11 @@
 package com.DIGIPEDIA.Digimon.Collection.repositories;
 
-import com.DIGIPEDIA.Digimon.Collection.TestData.EntityTestData;
-import com.DIGIPEDIA.Digimon.Collection.TestData.MaxEntityData;
+import com.DIGIPEDIA.Digimon.Collection.TestData.Dto.CDtoTestData;
+import com.DIGIPEDIA.Digimon.Collection.TestData.Entity.MaxEntityData;
+import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -20,19 +22,20 @@ import java.util.Optional;
 public class AttributeRepositoryTest {
 
     @Mock
-    private  AttributeRepository attributeRepository;
+    private AttributeRepository attributeRepository;
 
     @Test
     public void findByAttributeIdTest() {
-
-        byte[] img = EntityTestData.img;
+        Integer attributeId = 1;
 
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
+        attribute.setAttributeId(attributeId);
 
-        Optional<AttributeEntity> optAttribute= Optional.of(attribute);
+        Optional<AttributeEntity> optAttribute = Optional.of(attribute);
 
-        Mockito.when(attributeRepository.findByAttributeId(attribute.getAttributeId())).thenReturn(optAttribute);
-        optAttribute = this.attributeRepository.findByAttributeId(1);
+        Mockito.when(attributeRepository.findByAttributeId(attributeId))
+                .thenReturn(optAttribute);
+        optAttribute = this.attributeRepository.findByAttributeId(attributeId);
 
         assertTrue(optAttribute.isPresent());
         assertEquals(attribute.getAttributeId(), optAttribute.get().getAttributeId());
@@ -41,42 +44,42 @@ public class AttributeRepositoryTest {
 
     @Test
     public void findByAttributeNameTest() {
-        //Inicializa Imagen
-        byte[] img = EntityTestData.img;
+        Integer attributeId = 1;
+        String attributeName = TestData.attributeName;
 
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
+        attribute.setAttributeId(attributeId);
+        Optional<AttributeEntity> optAttribute = Optional.of(attribute);
 
-        Optional<AttributeEntity> optAttribute= Optional.of(attribute);
-
-        Mockito.when(attributeRepository.findByAttributeName(attribute.getAttributeName())).thenReturn(optAttribute);
-        optAttribute = this.attributeRepository.findByAttributeName("Fuego");
+        Mockito.when(attributeRepository.findByAttributeName(attributeName))
+                .thenReturn(optAttribute);
+        optAttribute = this.attributeRepository.findByAttributeName(attributeName);
 
         assertTrue(optAttribute.isPresent());
         assertEquals(attribute.getAttributeName(), optAttribute.get().getAttributeName());
+        assertEquals(attribute.getAttributeImg(), optAttribute.get().getAttributeImg());
         assertNotNull(optAttribute);
     }
 
     @Test
-    public void createAttributeTest(){
-
-        byte[] img = EntityTestData.img;
+    public void createAttributeTest() {
+        Integer attributeId = 1;
 
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
 
-        CAttributeDto attributeDto = new CAttributeDto("Fuego", img );
+        CAttributeDto attributeDto = CDtoTestData.createAttributeDto();
 
-        AttributeEntity attributeEntitySave = AttributeEntity
-                .builder()
-                .attributeName(attributeDto.getAttributeNameDto())
-                .attributeImg(attributeDto.getAttributeImgDto())
-                .build();
+        AttributeEntity attributeRes = attribute;
+        attributeRes.setAttributeId(attributeId);
 
-
-        Mockito.when(attributeRepository.save(attributeEntitySave)).thenReturn(attribute);
-        attribute = this.attributeRepository.save(attributeEntitySave);
+        Mockito.when(attributeRepository.save(attribute))
+                .thenReturn(attributeRes);
+        attributeRes = this.attributeRepository.save(attribute);
 
         assertEquals(attribute.getAttributeName(), attributeDto.getAttributeNameDto());
         assertEquals(attribute.getAttributeImg(), attributeDto.getAttributeImgDto());
+
+        assertNotNull(attributeRes.getAttributeId());
         assertNotNull(attribute);
     }
 }

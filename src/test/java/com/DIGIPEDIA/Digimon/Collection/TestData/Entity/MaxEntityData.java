@@ -1,11 +1,13 @@
-package com.DIGIPEDIA.Digimon.Collection.TestData;
+package com.DIGIPEDIA.Digimon.Collection.TestData.Entity;
 
 
+import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
 import com.DIGIPEDIA.Digimon.Collection.entities.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MaxEntityData extends EntityTestData {
+public class MaxEntityData extends TestData {
 
     //Data corresponding to GADTO, Max for entity creation
     public static AttributeEntity maxCreateAttributeEntity() {
@@ -14,13 +16,13 @@ public class MaxEntityData extends EntityTestData {
 
         return AttributeEntity
                 .builder()
-                .attributeId(1)
-                .attributeName("Fuego")
+                .attributeName(attributeName)
                 .attributeImg(img)
                 .digimonTypesAttribute(digimonTypeAttributeEntityList)
                 .skills(skillEntityList)
                 .build();
     }
+
     public static DigimonEntity maxCreateDigimonEntity() {
 
         List<SkillEntity> skillList = MinEntityData.minCreateSkillEntityList();
@@ -31,9 +33,9 @@ public class MaxEntityData extends EntityTestData {
                 .builder()
                 .digimonFamilyId(1)
                 .digimonMemory(5)
-                .digimonName("Agumon")
+                .digimonName(digimonName)
                 .digimonImg(img)
-                .digimonPassive("Fueguito")
+                .digimonPassive(digimonPassive)
                 .digimonFamilyId(1)
                 .digimon_family(digimonFamily)
                 .digimon_type_attribute(digimonTypeAttribute)
@@ -42,57 +44,73 @@ public class MaxEntityData extends EntityTestData {
                 .build();
 
     }
-    public static DigimonFamilyEntity maxCreateDigimonFamily(){
+
+    public static DigimonFamilyEntity maxCreateDigimonFamily() {
         List<DigimonEntity> digimonList = MinEntityData.minCreateDigimonEntityList();
 
         return DigimonFamilyEntity.builder()
-                .digimonFamilyId(1)
-                .digimonFamilyName("Bebé")
+                .digimonFamilyName(digimonFamilyName)
                 .digimons(digimonList)
                 .build();
     }
+
     public static SkillEntity maxCreateSkillEntity() {
         SkillTypeEntity skillType = MinEntityData.minCreateSkillTypeEntity();
         AttributeEntity attribute = MinEntityData.minCreateAttributeEntity();
         List<DigimonEntity> digimonList = MinEntityData.minCreateDigimonEntityList();
 
         return SkillEntity.builder()
-                .skillId(1)
-                .skillName("Placaje")
-                .skillDescription("Golpe")
+                .skillName(skillName)
+                .skillDescription(skillDescription)
                 .skillTypeId(1)
                 .skill_type(skillType)
                 .attribute(attribute)
                 .digimons(digimonList)
                 .build();
     }
+
+    public static List<DigimonSkillEntity> maxCreateDigimonSkillEntity() {
+        List<DigimonSkillEntity> digimonSkillList = new ArrayList<>();
+
+        idList.add(1);
+        idList.add(2);
+        idList.add(3);
+
+        idList.forEach((Integer skillId) -> {
+            digimonSkillList.add(DigimonSkillEntity.builder()
+                    .digimonId(genericId)
+                    .skillId(skillId)
+                    .build());
+        });
+        return digimonSkillList;
+    }
+
     public static DigimonTypeAttributeEntity maxCreateDigimonTypeAttributeEntity() {
         List<DigimonEntity> digimonList = MinEntityData.minCreateDigimonEntityList();
 
         return DigimonTypeAttributeEntity.builder()
-                .digimonTypeAttributeId(1)
                 .digimonTypeId(1)
                 .attributeId(1)
-                .digimonTypeAttributeName("Virus")
+                .digimonTypeAttributeName(digimonTypeName)
                 .digimonTypeAttributeImg(img)
                 .digimons(digimonList)
                 .build();
     }
-    public static DigimonTypeEntity maxCreateDigimonTypeEntity(){
+
+    public static DigimonTypeEntity maxCreateDigimonTypeEntity() {
         List<DigimonTypeAttributeEntity> digimonTypeAttributeList = MinEntityData.minCreateDigimonTypeAttributeEntityList();
 
         return DigimonTypeEntity.builder()
-                .digimonTypeId(1)
-                .digimonTypeName("Virus")
+                .digimonTypeName(digimonTypeName)
                 .digimonTypeAttribute(digimonTypeAttributeList)
                 .build();
     }
-    public static SkillTypeEntity maxCreateSkillTypeEntity(){
-    List<SkillEntity> skillList = MinEntityData.minCreateSkillEntityList();
+
+    public static SkillTypeEntity maxCreateSkillTypeEntity() {
+        List<SkillEntity> skillList = MinEntityData.minCreateSkillEntityList();
 
         return SkillTypeEntity.builder()
-                .skillTypeId(1)
-                .skillTypeName("Normal")
+                .skillTypeName(skillTypeName)
                 .skills(skillList)
                 .build();
     }
