@@ -23,8 +23,6 @@ public class AttributeController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<String> createAttributeController(@RequestBody CAttributeDto attributeDto) {
-        String created = "CREATED ATTRIBUTE";
-
         attributeService.createAttribute(attributeDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("{CREATED}");

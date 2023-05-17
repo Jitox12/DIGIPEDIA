@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Base64;
 import java.util.Optional;
 
 @DataJpaTest
@@ -31,14 +32,13 @@ public class AttributeRepositoryTest {
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
         attribute.setAttributeId(attributeId);
 
-        Optional<AttributeEntity> optAttribute = Optional.of(attribute);
-
         Mockito.when(attributeRepository.findByAttributeId(attributeId))
-                .thenReturn(optAttribute);
-        optAttribute = this.attributeRepository.findByAttributeId(attributeId);
+                .thenReturn(Optional.of(attribute));
+
+        Optional<AttributeEntity> optAttribute = this.attributeRepository.findByAttributeId(attributeId);
 
         assertTrue(optAttribute.isPresent());
-        assertEquals(attribute.getAttributeId(), optAttribute.get().getAttributeId());
+        assertEquals(attributeId, optAttribute.get().getAttributeId());
         assertNotNull(optAttribute);
     }
 
@@ -49,11 +49,10 @@ public class AttributeRepositoryTest {
 
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
         attribute.setAttributeId(attributeId);
-        Optional<AttributeEntity> optAttribute = Optional.of(attribute);
 
         Mockito.when(attributeRepository.findByAttributeName(attributeName))
-                .thenReturn(optAttribute);
-        optAttribute = this.attributeRepository.findByAttributeName(attributeName);
+                .thenReturn(Optional.of(attribute));
+        Optional<AttributeEntity> optAttribute = this.attributeRepository.findByAttributeName(attributeName);
 
         assertTrue(optAttribute.isPresent());
         assertEquals(attribute.getAttributeName(), optAttribute.get().getAttributeName());
@@ -66,20 +65,21 @@ public class AttributeRepositoryTest {
         Integer attributeId = 1;
 
         AttributeEntity attribute = MaxEntityData.maxCreateAttributeEntity();
-
         CAttributeDto attributeDto = CDtoTestData.createAttributeDto();
 
-        AttributeEntity attributeRes = attribute;
-        attributeRes.setAttributeId(attributeId);
+        AttributeEntity attributeToSave = attribute;
+        attributeToSave.setAttributeId(attributeId);
 
         Mockito.when(attributeRepository.save(attribute))
-                .thenReturn(attributeRes);
-        attributeRes = this.attributeRepository.save(attribute);
+                .thenReturn(attributeToSave);
+        AttributeEntity savedAttribute = this.attributeRepository.save(attribute);
 
-        assertEquals(attribute.getAttributeName(), attributeDto.getAttributeNameDto());
-        assertEquals(attribute.getAttributeImg(), attributeDto.getAttributeImgDto());
+        String encoderImg = Base64.getEncoder().encodeToString(savedAttribute.getAttributeImg());
 
-        assertNotNull(attributeRes.getAttributeId());
-        assertNotNull(attribute);
+        assertEquals(savedAttribute.getAttributeName(), attributeDto.getAttributeNameDto());
+        assertEquals(encoderImg, attributeDto.getAttributeImgDto());
+
+        assertNotNull(savedAttribute.getAttributeId());
+        assertNotNull(savedAttribute);
     }
 }

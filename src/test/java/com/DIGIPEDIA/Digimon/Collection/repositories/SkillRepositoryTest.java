@@ -1,8 +1,10 @@
 package com.DIGIPEDIA.Digimon.Collection.repositories;
 
 
+import com.DIGIPEDIA.Digimon.Collection.TestData.Dto.CDtoTestData;
 import com.DIGIPEDIA.Digimon.Collection.TestData.Entity.MaxEntityData;
 import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
+import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.CSkillDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.SkillEntity;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -28,12 +30,11 @@ public class SkillRepositoryTest {
         SkillEntity skill = MaxEntityData.maxCreateSkillEntity();
         skill.setSkillId(skillId);
 
-        Optional<SkillEntity> optSkill = Optional.of(skill);
 
         Mockito.when(skillRepository.findBySkillId(skillId))
-                .thenReturn(optSkill);
+                .thenReturn(Optional.of(skill));
 
-        optSkill = skillRepository.findBySkillId(skillId);
+        Optional<SkillEntity> optSkill = skillRepository.findBySkillId(skillId);
 
         assertNotNull(optSkill);
         assertNotNull(optSkill.get().getSkillId());
@@ -55,12 +56,11 @@ public class SkillRepositoryTest {
         SkillEntity skill = MaxEntityData.maxCreateSkillEntity();
         skill.setSkillId(skillId);
 
-        Optional<SkillEntity> optSkill = Optional.of(skill);
 
         Mockito.when(skillRepository.findBySkillName(skillName))
-                .thenReturn(optSkill);
+                .thenReturn(Optional.of(skill));
 
-        optSkill = skillRepository.findBySkillName(skillName);
+        Optional<SkillEntity> optSkill = skillRepository.findBySkillName(skillName);
 
         assertNotNull(optSkill);
         assertNotNull(optSkill.get().getSkillId());
@@ -78,21 +78,26 @@ public class SkillRepositoryTest {
         Integer skillId = TestData.genericId;
 
         SkillEntity skill = MaxEntityData.maxCreateSkillEntity();
+        CSkillDto skillDto = CDtoTestData.createSkillDto();
 
-        SkillEntity skillRes = skill;
-        skill.setSkillId(skillId);
+        SkillEntity skillToSave = skill;
+        skillToSave.setSkillId(skillId);
 
         Mockito.when(skillRepository.save(skill))
-                .thenReturn(skillRes);
+                .thenReturn(skillToSave);
 
-        skillRes = this.skillRepository.save(skill);
+        SkillEntity savedSkill = this.skillRepository.save(skill);
 
-        assertNotNull(skillRes);
-        assertNotNull(skillRes.getSkillId());
-        assertNotNull(skillRes.getSkillName());
-        assertNotNull(skillRes.getSkillDescription());
-        assertNotNull(skillRes.getSkill_type());
-        assertNotNull(skillRes.getDigimons());
-        assertNotNull(skillRes.getAttribute());
+       assertEquals(skillDto.getSkillNameDto(), savedSkill.getSkillName());
+       assertEquals(skillDto.getSkillDescriptionDto(),savedSkill.getSkillDescription());
+       assertEquals(skillDto.getSkillTypeIdDto(), savedSkill.getSkillTypeId());
+
+        assertNotNull(savedSkill);
+        assertNotNull(savedSkill.getSkillId());
+        assertNotNull(savedSkill.getSkillName());
+        assertNotNull(savedSkill.getSkillDescription());
+        assertNotNull(savedSkill.getSkill_type());
+        assertNotNull(savedSkill.getDigimons());
+        assertNotNull(savedSkill.getAttribute());
     }
 }

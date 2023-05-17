@@ -12,5 +12,5 @@ import javax.persistence.Lob;
 public class CAttributeDto {
     private String attributeNameDto;
     @Lob
-    private byte[] attributeImgDto;
+    private String attributeImgDto;
 }

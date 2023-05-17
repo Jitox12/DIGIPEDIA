@@ -17,7 +17,7 @@ public class CDtoTestData extends TestData {
     public static CAttributeDto createAttributeDto() {
         return CAttributeDto.builder()
                 .attributeNameDto(attributeName)
-                .attributeImgDto(img)
+                .attributeImgDto(imgData)
                 .build();
     }
 
@@ -26,9 +26,9 @@ public class CDtoTestData extends TestData {
 
         return CDigimonDto
                 .builder()
-                .digimonMemoryDto(1)
+                .digimonMemoryDto(5)
                 .digimonNameDto(digimonName)
-                .digimonImgDto(img)
+                .digimonImgDto(imgData)
                 .digimonPassiveDto(digimonPassive)
                 .digimonFamilyIdDto(1)
                 .digimonTypeAttributeIdDto(1)
@@ -55,7 +55,7 @@ public class CDtoTestData extends TestData {
                 .builder()
                 .digimonTypeIdDto(1)
                 .attributeIdDto(1)
-                .digimonTypeAttributeImgDto(img)
+                .digimonTypeAttributeImgDto(imgData)
                 .digimonTypeAttributeNameDto(digimonTypeName)
                 .build();
     }

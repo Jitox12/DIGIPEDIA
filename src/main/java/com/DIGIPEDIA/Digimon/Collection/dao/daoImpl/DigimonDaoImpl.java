@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,20 +30,19 @@ public class DigimonDaoImpl implements DigimonDao {
     @Override
     @Transactional
     public void createDigimonDao(CDigimonDto cDigimonDto) throws IOException {
-        DigimonEntity digimonSaved;
+        byte[] bytes = Base64.getDecoder().decode(cDigimonDto.getDigimonImgDto());
+
         DigimonEntity digimon = DigimonEntity.builder()
                 .digimonMemory(cDigimonDto.getDigimonMemoryDto())
                 .digimonName(cDigimonDto.getDigimonNameDto())
                 .digimonPassive(cDigimonDto.getDigimonPassiveDto())
-                .digimonImg(cDigimonDto.getDigimonImgDto())
+                .digimonImg(bytes)
                 .digimonFamilyId(cDigimonDto.getDigimonFamilyIdDto())
                 .digimonTypeAttributeId(cDigimonDto.getDigimonTypeAttributeIdDto())
                 .build();
 
-       digimonSaved = digimonRepository.save(digimon);
+        DigimonEntity digimonSaved = digimonRepository.save(digimon);
         try{
-
-
             digimonSkillDao.createDigimonSkillDao(digimonSaved.getDigimonId(), cDigimonDto.getSkillIdDto());
         }catch (IOException e){
             throw new RuntimeException(e);

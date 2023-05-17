@@ -32,11 +32,9 @@ public class DigimonFamilyRepositoryTest {
         digimonFamily.setDigimonFamilyId(digimonFamilyId);
 
 
-        Optional<DigimonFamilyEntity> optDigimonFamily = Optional.of(digimonFamily);
-
         Mockito.when(digimonFamilyRepository.findByDigimonFamilyId(digimonFamily.getDigimonFamilyId()))
-                .thenReturn(optDigimonFamily);
-        optDigimonFamily = this.digimonFamilyRepository.findByDigimonFamilyId(digimonFamilyId);
+                .thenReturn(Optional.of(digimonFamily));
+        Optional<DigimonFamilyEntity> optDigimonFamily = this.digimonFamilyRepository.findByDigimonFamilyId(digimonFamilyId);
 
         assertTrue(optDigimonFamily.isPresent());
         assertEquals(digimonFamily.getDigimonFamilyId(), optDigimonFamily.get().getDigimonFamilyId());
@@ -50,11 +48,10 @@ public class DigimonFamilyRepositoryTest {
 
         DigimonFamilyEntity digimonFamily = MaxEntityData.maxCreateDigimonFamily();
 
-        Optional<DigimonFamilyEntity> optDigimonFamily = Optional.of(digimonFamily);
 
         Mockito.when(digimonFamilyRepository.findByDigimonFamilyName(digimonFamilyName))
-                .thenReturn(optDigimonFamily);
-        optDigimonFamily = this.digimonFamilyRepository.findByDigimonFamilyName(digimonFamilyName);
+                .thenReturn(Optional.of(digimonFamily));
+        Optional<DigimonFamilyEntity> optDigimonFamily = this.digimonFamilyRepository.findByDigimonFamilyName(digimonFamilyName);
 
         assertTrue(optDigimonFamily.isPresent());
         assertEquals(digimonFamily.getDigimonFamilyName(), optDigimonFamily.get().getDigimonFamilyName());
@@ -69,17 +66,18 @@ public class DigimonFamilyRepositoryTest {
         DigimonFamilyEntity digimonFamily = MaxEntityData.maxCreateDigimonFamily();
         CDigimonFamilyDto digimonFamilyDto = CDtoTestData.createDigimonFamilyDto();
 
-        DigimonFamilyEntity digimonFamilyRes = digimonFamily;
-        digimonFamilyRes.setDigimonFamilyId(digimonFamilyId);
+        DigimonFamilyEntity digimonFamilyToSave = digimonFamily;
+        digimonFamilyToSave.setDigimonFamilyId(digimonFamilyId);
 
         Mockito.when(digimonFamilyRepository.save(digimonFamily))
-                .thenReturn(digimonFamilyRes);
+                .thenReturn(digimonFamilyToSave);
 
-        digimonFamilyRes = this.digimonFamilyRepository.save(digimonFamily);
+        DigimonFamilyEntity savedDigimonFamily = this.digimonFamilyRepository.save(digimonFamily);
 
-        assertEquals(digimonFamilyDto.getDigimonFamilyNameDto(), digimonFamilyRes.getDigimonFamilyName());
-        assertEquals(digimonFamilyRes.getDigimonFamilyName(), digimonFamily.getDigimonFamilyName());
-        assertNotNull(digimonFamilyRes.getDigimonFamilyId());
-        assertNotNull(digimonFamilyRes);
+        assertEquals(digimonFamilyDto.getDigimonFamilyNameDto(), savedDigimonFamily.getDigimonFamilyName());
+
+        assertEquals(savedDigimonFamily.getDigimonFamilyName(), digimonFamily.getDigimonFamilyName());
+        assertNotNull(savedDigimonFamily.getDigimonFamilyId());
+        assertNotNull(savedDigimonFamily);
     }
 }

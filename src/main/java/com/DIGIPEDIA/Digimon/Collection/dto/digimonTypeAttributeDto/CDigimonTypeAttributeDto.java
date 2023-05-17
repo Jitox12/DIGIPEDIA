@@ -10,6 +10,6 @@ import lombok.*;
 public class CDigimonTypeAttributeDto {
     private Integer digimonTypeIdDto;
     private Integer attributeIdDto;
-    private byte[] digimonTypeAttributeImgDto;
+    private String digimonTypeAttributeImgDto;
     private String digimonTypeAttributeNameDto;
 }

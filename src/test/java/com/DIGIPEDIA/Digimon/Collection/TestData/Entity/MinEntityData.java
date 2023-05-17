@@ -24,7 +24,7 @@ public class MinEntityData extends TestData {
                 .builder()
                 .attributeId(1)
                 .attributeName(attributeName)
-                .attributeImg(img)
+                .attributeImg(imgDecode)
                 .build();
     }
 
@@ -35,7 +35,7 @@ public class MinEntityData extends TestData {
                 .digimonTypeId(1)
                 .attributeId(1)
                 .digimonTypeAttributeName(digimonTypeName)
-                .digimonTypeAttributeImg(img)
+                .digimonTypeAttributeImg(imgDecode)
                 .build();
     }
 
@@ -83,7 +83,7 @@ public class MinEntityData extends TestData {
                 .digimonFamilyId(1)
                 .digimonMemory(5)
                 .digimonName(digimonName)
-                .digimonImg(img)
+                .digimonImg(imgDecode)
                 .digimonPassive(digimonPassive)
                 .digimonFamilyId(1)
                 .digimon_family(digimonFamily)
@@ -102,7 +102,7 @@ public class MinEntityData extends TestData {
                 .digimonTypeId(1)
                 .attributeId(1)
                 .digimonTypeAttributeName(digimonTypeName)
-                .digimonTypeAttributeImg(img)
+                .digimonTypeAttributeImg(imgDecode)
                 .build()
         );
 

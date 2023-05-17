@@ -12,7 +12,7 @@ import java.util.List;
 public class CDigimonDto {
     private Integer digimonMemoryDto;
     private String digimonNameDto;
-    private byte[] digimonImgDto;
+    private String digimonImgDto;
     private String digimonPassiveDto;
     private Integer digimonFamilyIdDto;
     private Integer digimonTypeAttributeIdDto;

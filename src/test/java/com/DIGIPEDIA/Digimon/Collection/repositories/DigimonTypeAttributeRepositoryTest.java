@@ -5,6 +5,7 @@ import com.DIGIPEDIA.Digimon.Collection.TestData.Entity.MaxEntityData;
 import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.CDigimonTypeAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonTypeAttributeEntity;
+import com.DIGIPEDIA.Digimon.Collection.entities.DigimonTypeEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Base64;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,12 +32,10 @@ public class DigimonTypeAttributeRepositoryTest {
         DigimonTypeAttributeEntity digimonTypeAttribute = MaxEntityData.maxCreateDigimonTypeAttributeEntity();
         digimonTypeAttribute.setDigimonTypeAttributeId(digimonTypeAttributeId);
 
-        Optional<DigimonTypeAttributeEntity> optDigimonTypeAttribute = Optional.of(digimonTypeAttribute);
-
         Mockito.when(digimonTypeAttributeRepository.findByDigimonTypeAttributeId(digimonTypeAttributeId))
-                .thenReturn(optDigimonTypeAttribute);
+                .thenReturn(Optional.of(digimonTypeAttribute));
 
-        optDigimonTypeAttribute = this.digimonTypeAttributeRepository.findByDigimonTypeAttributeId(digimonTypeAttributeId);
+        Optional<DigimonTypeAttributeEntity> optDigimonTypeAttribute = this.digimonTypeAttributeRepository.findByDigimonTypeAttributeId(digimonTypeAttributeId);
 
         assertTrue(optDigimonTypeAttribute.isPresent());
 
@@ -57,16 +57,15 @@ public class DigimonTypeAttributeRepositoryTest {
         DigimonTypeAttributeEntity digimonTypeAttribute = MaxEntityData.maxCreateDigimonTypeAttributeEntity();
         digimonTypeAttribute.setDigimonTypeAttributeId(digimonTypeAttributeId);
 
-        Optional<DigimonTypeAttributeEntity> optDigimonTypeAttribute = Optional.of(digimonTypeAttribute);
 
         Mockito.when(digimonTypeAttributeRepository.findByDigimonTypeAttributeName(digimonTypeAttributeName))
-                .thenReturn(optDigimonTypeAttribute);
+                .thenReturn(Optional.of(digimonTypeAttribute));
 
-        optDigimonTypeAttribute = this.digimonTypeAttributeRepository.findByDigimonTypeAttributeName(digimonTypeAttributeName);
+        Optional<DigimonTypeAttributeEntity> optDigimonTypeAttribute = this.digimonTypeAttributeRepository.findByDigimonTypeAttributeName(digimonTypeAttributeName);
 
         assertTrue(optDigimonTypeAttribute.isPresent());
 
-        assertEquals(digimonTypeAttributeId, optDigimonTypeAttribute.get().getDigimonTypeAttributeId());
+        assertEquals(digimonTypeAttributeName, optDigimonTypeAttribute.get().getDigimonTypeAttributeName());
 
         assertNotNull(optDigimonTypeAttribute.get().getDigimonTypeId());
         assertNotNull(optDigimonTypeAttribute.get().getAttributeId());
@@ -83,23 +82,25 @@ public class DigimonTypeAttributeRepositoryTest {
         DigimonTypeAttributeEntity digimonTypeAttribute = MaxEntityData.maxCreateDigimonTypeAttributeEntity();
         CDigimonTypeAttributeDto digimonTypeAttributeDto = CDtoTestData.createDigimonTypeAttributeDto();
 
-        DigimonTypeAttributeEntity digimonTypeAttributeRes = digimonTypeAttribute;
-        digimonTypeAttributeRes.setDigimonTypeAttributeId(digimonTypeAttributeId);
+        DigimonTypeAttributeEntity digimonTypeAttributeToSave = digimonTypeAttribute;
+        digimonTypeAttributeToSave.setDigimonTypeAttributeId(digimonTypeAttributeId);
 
         Mockito.when(digimonTypeAttributeRepository.save(digimonTypeAttribute))
-                .thenReturn(digimonTypeAttributeRes);
+                .thenReturn(digimonTypeAttributeToSave);
 
-        digimonTypeAttributeRes = this.digimonTypeAttributeRepository.save(digimonTypeAttribute);
+        DigimonTypeAttributeEntity savedDigimonTypeAttributeRes = this.digimonTypeAttributeRepository.save(digimonTypeAttribute);
 
-        assertNotNull(digimonTypeAttributeRes);
-        assertNotNull(digimonTypeAttributeRes.getDigimonTypeAttributeId());
-        assertNotNull(digimonTypeAttributeRes.getDigimonTypeId());
-        assertNotNull(digimonTypeAttributeRes.getDigimonTypeAttributeName());
-        assertNotNull(digimonTypeAttributeRes.getDigimonTypeAttributeImg());
+        assertNotNull(savedDigimonTypeAttributeRes);
+        assertNotNull(savedDigimonTypeAttributeRes.getDigimonTypeAttributeId());
+        assertNotNull(savedDigimonTypeAttributeRes.getDigimonTypeId());
+        assertNotNull(savedDigimonTypeAttributeRes.getDigimonTypeAttributeName());
+        assertNotNull(savedDigimonTypeAttributeRes.getDigimonTypeAttributeImg());
 
-        assertEquals(digimonTypeAttributeDto.getDigimonTypeIdDto(), digimonTypeAttributeRes.getDigimonTypeId());
-        assertEquals(digimonTypeAttributeDto.getDigimonTypeAttributeNameDto(), digimonTypeAttributeRes.getDigimonTypeAttributeName());
-        assertEquals(digimonTypeAttributeDto.getDigimonTypeAttributeImgDto(), digimonTypeAttributeRes.getDigimonTypeAttributeImg());
+        String encoderImg = Base64.getEncoder().encodeToString( digimonTypeAttribute.getDigimonTypeAttributeImg());
+
+        assertEquals(digimonTypeAttributeDto.getDigimonTypeIdDto(), savedDigimonTypeAttributeRes.getDigimonTypeId());
+        assertEquals(digimonTypeAttributeDto.getDigimonTypeAttributeImgDto(), encoderImg);
+        assertEquals(digimonTypeAttributeDto.getDigimonTypeAttributeNameDto(), savedDigimonTypeAttributeRes.getDigimonTypeAttributeName());
 
     }
 }

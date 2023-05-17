@@ -1,7 +1,9 @@
 package com.DIGIPEDIA.Digimon.Collection.repositories;
 
+import com.DIGIPEDIA.Digimon.Collection.TestData.Dto.CDtoTestData;
 import com.DIGIPEDIA.Digimon.Collection.TestData.Entity.MaxEntityData;
 import com.DIGIPEDIA.Digimon.Collection.TestData.TestData;
+import com.DIGIPEDIA.Digimon.Collection.dto.skillTypeDto.CSkillTypeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.SkillTypeEntity;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +20,6 @@ import java.util.Optional;
 @DataJpaTest
 @ExtendWith(MockitoExtension.class)
 public class SkillTypeRepositoryTest {
-
     @Mock
     SkillTypeRepository skillTypeRepository;
 
@@ -29,12 +30,11 @@ public class SkillTypeRepositoryTest {
         SkillTypeEntity skillType = MaxEntityData.maxCreateSkillTypeEntity();
         skillType.setSkillTypeId(skillTypeId);
 
-        Optional<SkillTypeEntity> optSkillType = Optional.of(skillType);
 
         Mockito.when(skillTypeRepository.findBySkillTypeId(skillTypeId))
-                .thenReturn(optSkillType);
+                .thenReturn(Optional.of(skillType));
 
-        optSkillType = skillTypeRepository.findBySkillTypeId(skillTypeId);
+        Optional<SkillTypeEntity> optSkillType = skillTypeRepository.findBySkillTypeId(skillTypeId);
 
         assertNotNull(optSkillType);
         assertNotNull(optSkillType.get().getSkillTypeId());
@@ -53,12 +53,11 @@ public class SkillTypeRepositoryTest {
         SkillTypeEntity skillType = MaxEntityData.maxCreateSkillTypeEntity();
         skillType.setSkillTypeId(skillTypeId);
 
-        Optional<SkillTypeEntity> optSkillType = Optional.of(skillType);
 
         Mockito.when(skillTypeRepository.findBySkillTypeName(skillTypeName))
-                .thenReturn(optSkillType);
+                .thenReturn(Optional.of(skillType));
 
-        optSkillType = skillTypeRepository.findBySkillTypeName(skillTypeName);
+        Optional<SkillTypeEntity> optSkillType = skillTypeRepository.findBySkillTypeName(skillTypeName);
 
         assertNotNull(optSkillType);
         assertNotNull(optSkillType.get().getSkillTypeId());
@@ -73,20 +72,22 @@ public class SkillTypeRepositoryTest {
         Integer skillTypeId = TestData.genericId;
 
         SkillTypeEntity skillType = MaxEntityData.maxCreateSkillTypeEntity();
+        CSkillTypeDto skillTypeDto = CDtoTestData.createSkillTypeDto();
 
-        SkillTypeEntity skillTypeRes = skillType;
-        skillTypeRes.setSkillTypeId(skillTypeId);
-
+        SkillTypeEntity skillTypeToSaved = skillType;
+        skillTypeToSaved.setSkillTypeId(skillTypeId);
 
         Mockito.when(skillTypeRepository.save(skillType))
-                .thenReturn(skillTypeRes);
+                .thenReturn(skillTypeToSaved);
 
-        skillTypeRes = skillTypeRepository.save(skillType);
+        SkillTypeEntity savedSkill = skillTypeRepository.save(skillType);
 
-        assertNotNull(skillTypeRes);
-        assertNotNull(skillTypeRes.getSkillTypeId());
-        assertNotNull(skillTypeRes.getSkills());
-        assertNotNull(skillTypeRes.getSkillTypeName());
+        assertEquals(skillTypeDto.getSkillTypeNameDto(), savedSkill.getSkillTypeName());
+
+        assertNotNull(savedSkill);
+        assertNotNull(savedSkill.getSkillTypeId());
+        assertNotNull(savedSkill.getSkills());
+        assertNotNull(savedSkill.getSkillTypeName());
 
     }
 }

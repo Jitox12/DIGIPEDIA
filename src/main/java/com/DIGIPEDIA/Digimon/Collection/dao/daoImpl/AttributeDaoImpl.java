@@ -5,9 +5,12 @@ import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.AttributeRepository;
+import com.DIGIPEDIA.Digimon.Collection.utils.Base64Coder;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -22,9 +25,12 @@ public class AttributeDaoImpl implements AttributeDao {
 
     @Override
     public void createAttributeDao(CAttributeDto cAttributeDto) throws IOException {
+
+        byte[] bytes = Base64Coder.base64Decoder(cAttributeDto.getAttributeImgDto());
+
         AttributeEntity attribute = AttributeEntity.builder()
                 .attributeName(cAttributeDto.getAttributeNameDto())
-                .attributeImg(cAttributeDto.getAttributeImgDto())
+                .attributeImg(bytes)
                 .build();
 
         attributeRepository.save(attribute);
@@ -38,6 +44,7 @@ public class AttributeDaoImpl implements AttributeDao {
         return attributeList;
     }
 
+    @Transactional
     @Override
     public AttributeEntity findAttributeByIdDao(Integer attributeId) throws IOException {
         AttributeEntity attribute;

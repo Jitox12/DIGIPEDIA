@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class DigimonTypeRepositoryTest {
 
     @Mock
-    DigimonTypeRepository digimonTypeRepository;
+    private DigimonTypeRepository digimonTypeRepository;
 
     @Test
     void findByDigimonTypeIdTest() {
@@ -30,12 +30,11 @@ public class DigimonTypeRepositoryTest {
 
         digimonType.setDigimonTypeId(digimonTypeId);
 
-        Optional<DigimonTypeEntity> optDigimonType = Optional.of(digimonType);
 
         Mockito.when(digimonTypeRepository.findByDigimonTypeId(digimonTypeId))
-                .thenReturn(optDigimonType);
+                .thenReturn(Optional.of(digimonType));
 
-        optDigimonType = this.digimonTypeRepository.findByDigimonTypeId(digimonTypeId);
+        Optional<DigimonTypeEntity> optDigimonType  = this.digimonTypeRepository.findByDigimonTypeId(digimonTypeId);
 
         assertNotNull(optDigimonType);
         assertNotNull(optDigimonType.get().getDigimonTypeId());
@@ -54,12 +53,10 @@ public class DigimonTypeRepositoryTest {
         DigimonTypeEntity digimonType = MaxEntityData.maxCreateDigimonTypeEntity();
         digimonType.setDigimonTypeId(digimonTypeId);
 
-        Optional<DigimonTypeEntity> optDigimonType = Optional.of(digimonType);
-
         Mockito.when(digimonTypeRepository.findByDigimonTypeName(digimonTypeName))
-                .thenReturn(optDigimonType);
+                .thenReturn(Optional.of(digimonType));
 
-        optDigimonType = this.digimonTypeRepository.findByDigimonTypeName(digimonTypeName);
+        Optional<DigimonTypeEntity> optDigimonType = this.digimonTypeRepository.findByDigimonTypeName(digimonTypeName);
 
         assertNotNull(optDigimonType);
         assertNotNull(optDigimonType.get().getDigimonTypeId());
@@ -75,17 +72,17 @@ public class DigimonTypeRepositoryTest {
 
         DigimonTypeEntity digimonType = MaxEntityData.maxCreateDigimonTypeEntity();
 
-        DigimonTypeEntity digimonTypeRes = digimonType;
-        digimonTypeRes.setDigimonTypeId(digimonTypeId);
+        DigimonTypeEntity digimonTypeToSave = digimonType;
+        digimonTypeToSave.setDigimonTypeId(digimonTypeId);
 
         Mockito.when(digimonTypeRepository.save(digimonType))
-                .thenReturn(digimonTypeRes);
+                .thenReturn(digimonTypeToSave);
 
-        digimonTypeRes = digimonTypeRepository.save(digimonType);
+        DigimonTypeEntity savedDigimonType = digimonTypeRepository.save(digimonType);
 
-        assertNotNull(digimonTypeRes);
-        assertNotNull(digimonTypeRes.getDigimonTypeId());
-        assertNotNull(digimonTypeRes.getDigimonTypeAttribute());
-        assertNotNull(digimonTypeRes.getDigimonTypeAttribute());
+        assertNotNull(savedDigimonType);
+        assertNotNull(savedDigimonType.getDigimonTypeId());
+        assertNotNull(savedDigimonType.getDigimonTypeAttribute());
+        assertNotNull(savedDigimonType.getDigimonTypeAttribute());
     }
 }

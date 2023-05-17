@@ -12,6 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/digimontypeattribute")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+
 public class DigimonTypeAttributeController {
     private final DigimonTypeAttributeService digimonTypeAttributeService;
 

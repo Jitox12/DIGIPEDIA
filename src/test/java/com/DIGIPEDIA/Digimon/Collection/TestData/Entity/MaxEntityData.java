@@ -17,7 +17,7 @@ public class MaxEntityData extends TestData {
         return AttributeEntity
                 .builder()
                 .attributeName(attributeName)
-                .attributeImg(img)
+                .attributeImg(imgDecode)
                 .digimonTypesAttribute(digimonTypeAttributeEntityList)
                 .skills(skillEntityList)
                 .build();
@@ -34,7 +34,7 @@ public class MaxEntityData extends TestData {
                 .digimonFamilyId(1)
                 .digimonMemory(5)
                 .digimonName(digimonName)
-                .digimonImg(img)
+                .digimonImg(imgDecode)
                 .digimonPassive(digimonPassive)
                 .digimonFamilyId(1)
                 .digimon_family(digimonFamily)
@@ -92,7 +92,7 @@ public class MaxEntityData extends TestData {
                 .digimonTypeId(1)
                 .attributeId(1)
                 .digimonTypeAttributeName(digimonTypeName)
-                .digimonTypeAttributeImg(img)
+                .digimonTypeAttributeImg(imgDecode)
                 .digimons(digimonList)
                 .build();
     }

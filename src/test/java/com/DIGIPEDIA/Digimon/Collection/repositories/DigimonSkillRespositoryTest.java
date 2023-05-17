@@ -30,17 +30,18 @@ public class DigimonSkillRespositoryTest {
 
         List<DigimonSkillEntity> digimonSkillList = MaxEntityData.maxCreateDigimonSkillEntity();
 
-        List<DigimonSkillEntity> digimonSkillRes = digimonSkillList;
-        digimonSkillRes.forEach((digimonSkill) -> {
+        List<DigimonSkillEntity> digimonSkillToSave = digimonSkillList;
+
+        digimonSkillToSave.forEach((digimonSkill) -> {
             digimonSkill.setDigimonSkillId(i.getAndIncrement());
         });
 
         Mockito.when(digimonSkillRepository.saveAll(digimonSkillList))
-                .thenReturn(digimonSkillRes);
+                .thenReturn(digimonSkillToSave);
 
-        digimonSkillRes = this.digimonSkillRepository.saveAll(digimonSkillList);
+        List<DigimonSkillEntity> savedDigimonSkill = this.digimonSkillRepository.saveAll(digimonSkillList);
 
-        digimonSkillRes.forEach(digimonSkill -> {
+        savedDigimonSkill.forEach(digimonSkill -> {
             assertNotNull(digimonSkill.getDigimonId());
             assertNotNull(digimonSkill.getDigimonSkillId());
             assertNotNull(digimonSkill.getSkillId());
