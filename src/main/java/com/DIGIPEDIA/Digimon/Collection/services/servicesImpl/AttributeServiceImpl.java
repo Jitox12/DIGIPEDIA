@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.CAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.GAAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.attributeDto.GAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.AttributeEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.AttributeMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.AttributeService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +29,13 @@ public class AttributeServiceImpl implements AttributeService {
 
     @Override
     public void createAttribute(CAttributeDto cAttributeDto) {
+
+        if(Objects.isNull(cAttributeDto)){
+            throw new BadRequestException("CAttributeDto is null");
+        }
+        String upperCaseAttributeName = FormatUtils.UpperCase(cAttributeDto.getAttributeNameDto());
+        cAttributeDto.setAttributeNameDto(upperCaseAttributeName);
+
         try {
             attributeDao.createAttributeDao(cAttributeDto);
         } catch (IOException e) {

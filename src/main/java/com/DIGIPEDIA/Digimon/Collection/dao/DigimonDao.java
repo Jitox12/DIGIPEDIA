@@ -4,6 +4,7 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonEntity;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface DigimonDao {

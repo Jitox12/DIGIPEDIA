@@ -5,10 +5,10 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.CDigimonType
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonTypeAttributeEntity;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonTypeAttributeRepository;
+import com.DIGIPEDIA.Digimon.Collection.utils.Base64CoderUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -23,7 +23,7 @@ public class DigimonTypeAttributeDaoImpl implements DigimonTypeAttributeDao {
     @Override
     public void createSkillDao(CDigimonTypeAttributeDto digimonTypeAttributeDto) throws IOException {
 
-        byte[] bytes = Base64.getDecoder().decode(digimonTypeAttributeDto.getDigimonTypeAttributeImgDto());
+        byte[] bytes = Base64CoderUtils.base64Decoder(digimonTypeAttributeDto.getDigimonTypeAttributeImgDto());
 
         DigimonTypeAttributeEntity digimonTypeAttributeEntity = DigimonTypeAttributeEntity.builder()
                 .digimonTypeId(digimonTypeAttributeDto.getDigimonTypeIdDto())

@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.skillTypeDto.CSkillTypeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.skillTypeDto.GASkillTypeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.skillTypeDto.GSkillTypeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.SkillTypeEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.SkillTypeMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.SkillTypeService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +29,13 @@ public class SkillTypeServiceImpl implements SkillTypeService {
 
     @Override
     public void createSkillType(CSkillTypeDto skillTypeDto) {
+
+        if(Objects.isNull(skillTypeDto)){
+            throw new BadRequestException("CDigimonFamilyDto  is null");
+        }
+        String upperCaseSkillName = FormatUtils.UpperCase(skillTypeDto.getSkillTypeNameDto());
+        skillTypeDto.setSkillTypeNameDto(upperCaseSkillName);
+
         try{
             skillTypeDao.createSkillTypeDao(skillTypeDto);
         }catch (IOException e){

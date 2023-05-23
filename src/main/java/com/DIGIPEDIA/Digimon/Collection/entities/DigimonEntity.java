@@ -22,7 +22,8 @@ public class DigimonEntity {
     @Column(name = "digimon_name")
     private String digimonName;
     @Lob
-    @Column(name = "digimon_img")
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "digimon_img", columnDefinition = "bigint")
     private byte[] digimonImg;
 
     @Column(name = "digimon_passive")
@@ -41,7 +42,7 @@ public class DigimonEntity {
             inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")})
     private List<SkillEntity> skills;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "digimon_family_id",insertable = false, updatable = false)
     private DigimonFamilyEntity digimon_family;
 

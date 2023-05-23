@@ -6,11 +6,12 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonEntity;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonRepository;
+import com.DIGIPEDIA.Digimon.Collection.utils.Base64CoderUtils;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.Base64;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class DigimonDaoImpl implements DigimonDao {
     @Override
     @Transactional
     public void createDigimonDao(CDigimonDto cDigimonDto) throws IOException {
-        byte[] bytes = Base64.getDecoder().decode(cDigimonDto.getDigimonImgDto());
+        byte[] bytes = Base64CoderUtils.base64Decoder(cDigimonDto.getDigimonImgDto());
 
         DigimonEntity digimon = DigimonEntity.builder()
                 .digimonMemory(cDigimonDto.getDigimonMemoryDto())

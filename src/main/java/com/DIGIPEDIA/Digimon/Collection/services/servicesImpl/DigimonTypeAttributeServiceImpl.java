@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.CDigimonType
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.GADigimonTypeAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.GDigimonTypeAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonTypeAttributeEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.DigimonTypeAttributeMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.DigimonTypeAttributeService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 @Service
 public class DigimonTypeAttributeServiceImpl implements DigimonTypeAttributeService {
@@ -26,6 +29,12 @@ public class DigimonTypeAttributeServiceImpl implements DigimonTypeAttributeServ
 
     @Override
     public void createDigimonTypeAttribute(CDigimonTypeAttributeDto digimonTypeAttributeDto) {
+        if(Objects.isNull(digimonTypeAttributeDto)){
+            throw new BadRequestException("CDigimonFamilyDto  is null");
+        }
+        String upperCaseDigimonTypeAttributeName = FormatUtils.UpperCase(digimonTypeAttributeDto.getDigimonTypeAttributeNameDto());
+        digimonTypeAttributeDto.setDigimonTypeAttributeNameDto(upperCaseDigimonTypeAttributeName);
+
         try{
             digimonTypeAttributeDao.createSkillDao(digimonTypeAttributeDto);
         }catch (IOException e){

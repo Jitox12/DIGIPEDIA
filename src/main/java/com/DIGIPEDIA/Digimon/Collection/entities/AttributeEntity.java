@@ -22,10 +22,11 @@ public class AttributeEntity {
     @Column(name = "attribute_name")
     private String attributeName;
     @Lob
-    @Column(name = "attribute_img")
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "attribute_img", columnDefinition = "bigint")
     private byte[] attributeImg;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "digimon_type_attribute",
             joinColumns = {@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")},

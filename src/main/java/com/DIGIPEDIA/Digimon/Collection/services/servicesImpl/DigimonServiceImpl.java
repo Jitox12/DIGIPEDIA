@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.DigimonMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.DigimonService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +29,13 @@ public class DigimonServiceImpl implements DigimonService {
 
     @Override
     public void createDigimon(CDigimonDto cDigimonDto) {
+
+        if(Objects.isNull(cDigimonDto)){
+            throw new BadRequestException("CDigimonFamilyDto  is null");
+        }
+        String upperCaseDigimonName = FormatUtils.UpperCase(cDigimonDto.getDigimonNameDto());
+        cDigimonDto.setDigimonNameDto(upperCaseDigimonName);
+
         try{
             digimonDao.createDigimonDao(cDigimonDto);
         }catch (IOException e){
@@ -36,6 +46,7 @@ public class DigimonServiceImpl implements DigimonService {
 
     @Override
     public GADigimonDto findDigimonById(Integer digimonId) {
+
         try{
             GADigimonDto digimonDto;
             DigimonEntity digimon;

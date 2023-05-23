@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto.CDigimonFamilyDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto.GADigimonFamilyDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonFamilyDto.GDigimonFamilyDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonFamilyEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.DigimonFamilyMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.DigimonFamilyService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +28,12 @@ public class DigimonFamilyServiceImpl implements DigimonFamilyService {
 
     @Override
     public void createDigimonFamily(CDigimonFamilyDto cDigimonFamilyDto) {
+        if(Objects.isNull(cDigimonFamilyDto)){
+            throw new BadRequestException("CDigimonFamilyDto  is null");
+        }
+        String upperCaseDigimonFamilyName = FormatUtils.UpperCase(cDigimonFamilyDto.getDigimonFamilyNameDto());
+        cDigimonFamilyDto.setDigimonFamilyNameDto(upperCaseDigimonFamilyName);
+
         try {
             digimonFamilyDao.createDigimonFamilyDao(cDigimonFamilyDto);
         } catch (IOException e) {

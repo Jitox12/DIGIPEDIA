@@ -26,9 +26,10 @@ public class DigimonTypeAttributeEntity implements Serializable {
     @Column(name = "digimon_type_attribute_name")
     private String digimonTypeAttributeName;
     @Lob
-    @Column(name = "digimon_type_attribute_img" )
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "digimon_type_attribute_img", columnDefinition = "bigint" )
     private byte[] digimonTypeAttributeImg;
 
-    @OneToMany(mappedBy = "digimon_type_attribute")
+    @OneToMany(mappedBy = "digimon_type_attribute", fetch = FetchType.EAGER)
     private List<DigimonEntity> digimons;
 }

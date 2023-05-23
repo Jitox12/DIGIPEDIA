@@ -5,10 +5,14 @@ spring:
     password: 12345
   jpa:
     hibernate:
+      jdbc:
+        lob:
+          non_contextual_creation: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+  logging.level.root: DEBUG
 
 server:
   port: 8080

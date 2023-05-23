@@ -5,12 +5,15 @@ import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.CSkillDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.GASkillDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.skillDto.GSkillDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.SkillEntity;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.mappers.SkillMapper;
 import com.DIGIPEDIA.Digimon.Collection.services.SkillService;
+import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 @Service
 public class SkillServiceImpl implements SkillService {
@@ -25,6 +28,14 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public void createSkill(CSkillDto skillDto) {
+
+        if(Objects.isNull(skillDto)){
+            throw new BadRequestException("CDigimonFamilyDto  is null");
+        }
+        String upperCaseSkillName = FormatUtils.UpperCase(skillDto.getSkillNameDto());
+        skillDto.setSkillNameDto(upperCaseSkillName);
+
+
         try {
             skillDao.createSkillDao(skillDto);
         } catch (IOException e) {
