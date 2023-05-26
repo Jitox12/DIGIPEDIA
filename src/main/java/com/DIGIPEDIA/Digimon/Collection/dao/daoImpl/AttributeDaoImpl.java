@@ -34,7 +34,7 @@ public class AttributeDaoImpl implements AttributeDao {
 
         attributeRepository.save(attribute);
     }
-
+    @Transactional
     @Override
     public List<AttributeEntity> findAllAttribute() throws IOException {
         List<AttributeEntity> attributeList;
@@ -53,6 +53,7 @@ public class AttributeDaoImpl implements AttributeDao {
         return attribute;
     }
 
+    @Transactional
     @Override
     public AttributeEntity findAttributeByNameDao(String attributeName) throws IOException {
         AttributeEntity attribute;

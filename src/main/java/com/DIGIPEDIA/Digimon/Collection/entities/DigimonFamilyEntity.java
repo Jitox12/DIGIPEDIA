@@ -22,6 +22,6 @@ public class DigimonFamilyEntity {
     @Column(name = "digimon_family_name")
     private String digimonFamilyName;
 
-    @OneToMany(mappedBy = "digimon_family")
+    @OneToMany(mappedBy = "digimon_family", fetch = FetchType.EAGER)
     private List<DigimonEntity> digimons;
 }

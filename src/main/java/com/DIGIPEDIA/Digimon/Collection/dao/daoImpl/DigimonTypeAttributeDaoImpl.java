@@ -8,6 +8,7 @@ import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonTypeAttributeReposit
 import com.DIGIPEDIA.Digimon.Collection.utils.Base64CoderUtils;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class DigimonTypeAttributeDaoImpl implements DigimonTypeAttributeDao {
     }
 
     @Override
+    @Transactional
     public void createSkillDao(CDigimonTypeAttributeDto digimonTypeAttributeDto) throws IOException {
 
         byte[] bytes = Base64CoderUtils.base64Decoder(digimonTypeAttributeDto.getDigimonTypeAttributeImgDto());
@@ -36,6 +38,7 @@ public class DigimonTypeAttributeDaoImpl implements DigimonTypeAttributeDao {
     }
 
     @Override
+    @Transactional
     public List<DigimonTypeAttributeEntity> findAllDigimonTypeAttributeDao() throws IOException {
 
         List<DigimonTypeAttributeEntity> digimonTypeAttributeList;
@@ -45,6 +48,7 @@ public class DigimonTypeAttributeDaoImpl implements DigimonTypeAttributeDao {
     }
 
     @Override
+    @Transactional
     public DigimonTypeAttributeEntity findDigimonTypeAttributeByIdDao(Integer digimonTypeAttributeId) throws IOException {
         DigimonTypeAttributeEntity digimonTypeAttributeEntity;
         digimonTypeAttributeEntity = digimonTypeAttributeRepository.findByDigimonTypeAttributeId(digimonTypeAttributeId)
@@ -54,6 +58,8 @@ public class DigimonTypeAttributeDaoImpl implements DigimonTypeAttributeDao {
     }
 
     @Override
+    @Transactional
+
     public DigimonTypeAttributeEntity findDigimonTypeAttributeByNameDao(String digimonTypeAttributeName) throws IOException {
         DigimonTypeAttributeEntity digimonTypeAttributeEntity;
         digimonTypeAttributeEntity = digimonTypeAttributeRepository.findByDigimonTypeAttributeName(digimonTypeAttributeName)

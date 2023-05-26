@@ -21,7 +21,7 @@ public class DigimonTypeEntity {
     @Column(name = "digimon_type_name")
     private String digimonTypeName;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "digimon_type_attribute",
             joinColumns = {@JoinColumn(name = "digimon_type_id", referencedColumnName = "digimon_type_id")},

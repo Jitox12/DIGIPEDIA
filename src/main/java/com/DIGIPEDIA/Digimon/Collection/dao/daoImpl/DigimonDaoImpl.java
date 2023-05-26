@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,7 +28,6 @@ public class DigimonDaoImpl implements DigimonDao {
 
 
     @Override
-    @Transactional
     public void createDigimonDao(CDigimonDto cDigimonDto) throws IOException {
         byte[] bytes = Base64CoderUtils.base64Decoder(cDigimonDto.getDigimonImgDto());
 
@@ -58,6 +56,7 @@ public class DigimonDaoImpl implements DigimonDao {
         return digimonList;
     }
 
+    @Transactional
     @Override
     public DigimonEntity findDigimonByIdDao(Integer digimonId) throws IOException {
         DigimonEntity digimon;
@@ -68,6 +67,7 @@ public class DigimonDaoImpl implements DigimonDao {
         return digimon;
     }
 
+    @Transactional
     @Override
     public DigimonEntity findDigimonByNameDao(String digimonName) throws IOException {
         DigimonEntity digimon;

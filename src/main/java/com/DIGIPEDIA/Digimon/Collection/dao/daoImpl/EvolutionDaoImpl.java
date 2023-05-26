@@ -7,6 +7,7 @@ import com.DIGIPEDIA.Digimon.Collection.entities.EvolutionEntity;
 import com.DIGIPEDIA.Digimon.Collection.repositories.EvolutionRepository;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class EvolutionDaoImpl implements EvolutionDao {
     }
 
     @Override
+    @Transactional
     public void evolveDigimon(Integer digimonId, Integer digimonEvolveId) {
 
         EvolutionEntity evolution = EvolutionEntity.builder()
@@ -32,6 +34,7 @@ public class EvolutionDaoImpl implements EvolutionDao {
     }
 
     @Override
+    @Transactional
     public boolean verifyEvolve(Integer digimonId, Integer digimonEvolveId) {
         boolean evoVerify = evolutionRepository.noRepeatEvolve(digimonId,digimonEvolveId);;
         return evoVerify;

@@ -7,6 +7,7 @@ import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonFamilyRepository;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class DigimonFamilyDaoImpl implements DigimonFamilyDao {
     }
 
     @Override
+    @Transactional
     public void createDigimonFamilyDao(CDigimonFamilyDto cDigimonFamilyDto) throws IOException {
         DigimonFamilyEntity digimonFamily = DigimonFamilyEntity
                 .builder()
@@ -30,6 +32,7 @@ public class DigimonFamilyDaoImpl implements DigimonFamilyDao {
     }
 
     @Override
+    @Transactional
     public List<DigimonFamilyEntity> findAllDigimonFamilyDao() throws IOException {
         List<DigimonFamilyEntity> digimonFamilyList;
         digimonFamilyList = digimonFamilyRepository.findAll();
@@ -38,19 +41,21 @@ public class DigimonFamilyDaoImpl implements DigimonFamilyDao {
     }
 
     @Override
+    @Transactional
     public DigimonFamilyEntity findDigimonFamilyByIdDao(Integer digimonFamilyId) throws IOException {
         DigimonFamilyEntity digimonFamily;
         digimonFamily = digimonFamilyRepository.findByDigimonFamilyId(digimonFamilyId)
-                .orElseThrow(()-> new BadRequestException("Digimon Family id: ".concat(String.valueOf(digimonFamilyId))));
+                .orElseThrow(() -> new BadRequestException("Digimon Family id: ".concat(String.valueOf(digimonFamilyId))));
 
         return digimonFamily;
     }
 
     @Override
+    @Transactional
     public DigimonFamilyEntity findDigimonFamilyByNameDao(String digimonFamilyName) throws IOException {
         DigimonFamilyEntity digimonFamily;
         digimonFamily = digimonFamilyRepository.findByDigimonFamilyName(digimonFamilyName)
-                .orElseThrow(()-> new BadRequestException("Digimon Family Name: ".concat(digimonFamilyName)));
+                .orElseThrow(() -> new BadRequestException("Digimon Family Name: ".concat(digimonFamilyName)));
 
         return digimonFamily;
     }

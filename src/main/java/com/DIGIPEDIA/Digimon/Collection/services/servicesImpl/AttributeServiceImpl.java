@@ -31,17 +31,17 @@ public class AttributeServiceImpl implements AttributeService {
     public void createAttribute(CAttributeDto cAttributeDto) {
 
         if(Objects.isNull(cAttributeDto)){
-            throw new BadRequestException("CAttributeDto is null");
-        }
-        String upperCaseAttributeName = FormatUtils.UpperCase(cAttributeDto.getAttributeNameDto());
+        throw new BadRequestException("CAttributeDto is null");
+    }
+    String upperCaseAttributeName = FormatUtils.UpperCase(cAttributeDto.getAttributeNameDto());
         cAttributeDto.setAttributeNameDto(upperCaseAttributeName);
 
         try {
-            attributeDao.createAttributeDao(cAttributeDto);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        attributeDao.createAttributeDao(cAttributeDto);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
     }
+}
 
     @Override
     public GAAttributeDto findAttributeById(Integer attributeId) {

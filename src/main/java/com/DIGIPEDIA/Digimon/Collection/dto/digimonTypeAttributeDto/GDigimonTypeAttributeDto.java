@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Lob;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,5 +15,6 @@ public class GDigimonTypeAttributeDto {
 
     private String digimonTypeAttributeIdDto;
     private String digimonTypeAttributeNameDto;
+    @Lob
     private byte[] digimonTypeAttributeImgDto;
 }

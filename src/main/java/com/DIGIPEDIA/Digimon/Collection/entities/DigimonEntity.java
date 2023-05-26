@@ -22,7 +22,7 @@ public class DigimonEntity {
     @Column(name = "digimon_name")
     private String digimonName;
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "digimon_img", columnDefinition = "bigint")
     private byte[] digimonImg;
 
@@ -35,18 +35,18 @@ public class DigimonEntity {
     @Column(name = "digimon_type_attribute_id")
     private Integer digimonTypeAttributeId;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "digimon_skill",
             joinColumns = {@JoinColumn(name = "digimon_id", referencedColumnName = "digimon_id")},
             inverseJoinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")})
     private List<SkillEntity> skills;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "digimon_family_id",insertable = false, updatable = false)
     private DigimonFamilyEntity digimon_family;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "digimon_type_attribute_id",insertable = false, updatable = false)
     private DigimonTypeAttributeEntity digimon_type_attribute;
 }

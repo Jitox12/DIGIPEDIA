@@ -5,6 +5,7 @@ import com.DIGIPEDIA.Digimon.Collection.entities.DigimonSkillEntity;
 import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonSkillRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class DigimonSkillDaoImpl implements DigimonSkillDao {
     }
 
     @Override
+    @Transactional
     public void createDigimonSkillDao(Integer digimonId, List<Integer> skillIdList) throws IOException {
         List<DigimonSkillEntity> digimonSkillList = new ArrayList<>();
         skillIdList.forEach((Integer skillId) -> {

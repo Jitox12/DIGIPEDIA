@@ -22,7 +22,7 @@ public class AttributeEntity {
     @Column(name = "attribute_name")
     private String attributeName;
     @Lob
-    @Basic(fetch = FetchType.EAGER)
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "attribute_img", columnDefinition = "bigint")
     private byte[] attributeImg;
 

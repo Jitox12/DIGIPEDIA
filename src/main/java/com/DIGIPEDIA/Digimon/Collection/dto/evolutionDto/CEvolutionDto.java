@@ -8,6 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CEvolutionDto {
-    private Integer digimonId;
-    private Integer digimonEvolvedId;
+    private Integer digimonIdDto;
+    private Integer digimonEvolvedIdDto;
 }

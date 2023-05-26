@@ -24,8 +24,8 @@ public class EvolutionServiceImpl implements EvolutionService {
     @Override
     public void evolveDigimonService(CEvolutionDto evolutionDto) {
         try{
-            DigimonEntity digimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonId());
-            DigimonEntity evolvedDigimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonEvolvedId());
+            DigimonEntity digimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonIdDto());
+            DigimonEntity evolvedDigimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonEvolvedIdDto());
 
 
         }catch (IOException e){

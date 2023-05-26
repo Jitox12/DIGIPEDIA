@@ -7,6 +7,7 @@ import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.SkillTypeRepository;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class SkillTypeDaoImpl implements SkillTypeDao {
     }
 
     @Override
+    @Transactional
     public void createSkillTypeDao(CSkillTypeDto skillTypeDto) throws IOException {
         SkillTypeEntity skillType = SkillTypeEntity.builder()
                 .skillTypeName(skillTypeDto.getSkillTypeNameDto())
@@ -29,6 +31,7 @@ public class SkillTypeDaoImpl implements SkillTypeDao {
     }
 
     @Override
+    @Transactional
     public List<SkillTypeEntity> findAllSkillTypesDao() throws IOException {
         List<SkillTypeEntity> skillTypeList;
         skillTypeList = skillTypeRepository.findAll();
@@ -37,6 +40,7 @@ public class SkillTypeDaoImpl implements SkillTypeDao {
     }
 
     @Override
+    @Transactional
     public SkillTypeEntity findSkillTypeByIdDao(Integer skillTypeId) throws IOException {
         SkillTypeEntity skillType;
         skillType = skillTypeRepository.findBySkillTypeId(skillTypeId)
@@ -46,6 +50,7 @@ public class SkillTypeDaoImpl implements SkillTypeDao {
     }
 
     @Override
+    @Transactional
     public SkillTypeEntity findSkillTypeByNameDao(String skillTypeName) throws IOException {
         SkillTypeEntity skillType;
         skillType = skillTypeRepository.findBySkillTypeName(skillTypeName)

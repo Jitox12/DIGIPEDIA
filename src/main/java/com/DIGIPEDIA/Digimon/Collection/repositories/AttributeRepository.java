@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttributeRepository extends JpaRepository<AttributeEntity, Integer> {
+
     Optional<AttributeEntity> findByAttributeId(Integer attributeId);
     Optional<AttributeEntity> findByAttributeName(String attributeName);
     List<AttributeEntity> findAll();

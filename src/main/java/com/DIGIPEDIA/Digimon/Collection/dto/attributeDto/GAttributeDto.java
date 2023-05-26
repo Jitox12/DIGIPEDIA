@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Lob;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,5 +14,6 @@ import lombok.Setter;
 public class GAttributeDto {
     private Integer attributeIdDto;
     private String attributeNameDto;
+    @Lob
     private byte[] attributeImgDto;
 }

@@ -22,12 +22,12 @@ public class EvoInvoDaoImpl implements EvoInvoDao {
     @Override
     @Transactional
     public void EvoDao(CEvolutionDto evolutionDto) {
-        boolean evoVerify = evolutionDao.verifyEvolve(evolutionDto.getDigimonId(),evolutionDto.getDigimonEvolvedId());
-        boolean invoVerify = involutionDao.verifyInvolve(evolutionDto.getDigimonId(),evolutionDto.getDigimonEvolvedId());
+        boolean evoVerify = evolutionDao.verifyEvolve(evolutionDto.getDigimonIdDto(),evolutionDto.getDigimonEvolvedIdDto());
+        boolean invoVerify = involutionDao.verifyInvolve(evolutionDto.getDigimonIdDto(),evolutionDto.getDigimonEvolvedIdDto());
 
         if (evoVerify && invoVerify){
-            evolutionDao.evolveDigimon(evolutionDto.getDigimonId(),evolutionDto.getDigimonEvolvedId());
-            involutionDao.involveDigimon(evolutionDto.getDigimonEvolvedId(),evolutionDto.getDigimonId());
+            evolutionDao.evolveDigimon(evolutionDto.getDigimonIdDto(),evolutionDto.getDigimonEvolvedIdDto());
+            involutionDao.involveDigimon(evolutionDto.getDigimonEvolvedIdDto(),evolutionDto.getDigimonIdDto());
         }else{
             throw new BadRequestException("The evolution already exists or it is not valid");
         }

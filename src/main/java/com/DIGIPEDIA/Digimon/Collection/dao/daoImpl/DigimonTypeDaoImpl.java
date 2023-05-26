@@ -7,6 +7,7 @@ import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.repositories.DigimonTypeRepository;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 @Component
@@ -28,6 +29,7 @@ public class DigimonTypeDaoImpl implements DigimonTypeDao {
     }
 
     @Override
+    @Transactional
     public List<DigimonTypeEntity> findAllDigimonTypeDao() throws IOException {
         List<DigimonTypeEntity> digimonTypeList;
 
@@ -37,6 +39,7 @@ public class DigimonTypeDaoImpl implements DigimonTypeDao {
     }
 
     @Override
+    @Transactional
     public DigimonTypeEntity findDigimonTypeByIdDao(Integer digimonTypeId) throws IOException {
         DigimonTypeEntity digimonType;
         digimonType = digimonTypeRepository.findByDigimonTypeId(digimonTypeId)
@@ -46,6 +49,7 @@ public class DigimonTypeDaoImpl implements DigimonTypeDao {
     }
 
     @Override
+    @Transactional
     public DigimonTypeEntity findDigimonTypeByNameDao(String digimonTypeName) throws IOException {
         DigimonTypeEntity digimonType;
         digimonType = digimonTypeRepository.findByDigimonTypeName(digimonTypeName)

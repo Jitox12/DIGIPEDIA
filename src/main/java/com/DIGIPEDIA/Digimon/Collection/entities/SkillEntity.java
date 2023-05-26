@@ -28,18 +28,18 @@ public class SkillEntity {
     private Integer skillTypeId;
     @Column(name = "attribute_id")
     private Integer attributeId;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "digimon_skill",
             joinColumns = {@JoinColumn(name = "skill_id", referencedColumnName = "skill_id")},
             inverseJoinColumns = {@JoinColumn(name = "digimon_id", referencedColumnName = "digimon_id")})
     private List<DigimonEntity> digimons;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "skill_type_id",insertable = false, updatable = false)
     private SkillTypeEntity skill_type;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "attribute_id",insertable = false, updatable = false)
     private AttributeEntity attribute;
 

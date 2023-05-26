@@ -11,6 +11,7 @@ import com.DIGIPEDIA.Digimon.Collection.services.DigimonService;
 import com.DIGIPEDIA.Digimon.Collection.utils.FormatUtils;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -44,6 +45,7 @@ public class DigimonServiceImpl implements DigimonService {
 
     }
 
+    @Transactional
     @Override
     public GADigimonDto findDigimonById(Integer digimonId) {
 
@@ -61,6 +63,7 @@ public class DigimonServiceImpl implements DigimonService {
     }
 
     @Override
+    @Transactional
     public GADigimonDto findDigimonByName(String digimonName) {
         try{
             GADigimonDto digimonDto;

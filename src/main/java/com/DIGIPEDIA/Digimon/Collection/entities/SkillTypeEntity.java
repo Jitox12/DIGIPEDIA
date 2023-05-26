@@ -21,6 +21,6 @@ public class SkillTypeEntity {
     @Column(name = "skill_type_name")
     private String skillTypeName;
 
-    @OneToMany(mappedBy = "skill_type")
+    @OneToMany(mappedBy = "skill_type", fetch = FetchType.EAGER)
     private List<SkillEntity> skills;
 }

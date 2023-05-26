@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Lob;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,7 @@ import java.util.List;
 public class GAAttributeDto {
     private Integer attributeIdDto;
     private String attributeNameDto;
+    @Lob
     private byte[] attributeImgDto;
     private List<GDigimonTypeAttributeDto> digimonTypesAttributeDto;
     private List<GSkillDto> skillsDto;
