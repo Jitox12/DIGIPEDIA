@@ -6,26 +6,34 @@ import com.DIGIPEDIA.Digimon.Collection.repositories.InvolutionRepository;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Component
 public class InvolutionDaoImpl implements InvolutionDao {
-    private  final InvolutionRepository involutionRepository;
+    private final InvolutionRepository involutionRepository;
 
     public InvolutionDaoImpl(InvolutionRepository involutionRepository) {
         this.involutionRepository = involutionRepository;
     }
 
     @Override
-    @Transactional
     public void involveDigimon(Integer digimonId, Integer digimonInvolveId) {
-        InvolutionEntity involution = InvolutionEntity.builder().digimonId(digimonId).digimonInvolvedId(digimonInvolveId).build();
+        InvolutionEntity involution = InvolutionEntity.builder()
+                .digimonId(digimonId)
+                .digimonInvolvedId(digimonInvolveId)
+                .build();
+
         involutionRepository.save(involution);
     }
 
     @Override
-    @Transactional
     public boolean verifyInvolve(Integer digimonId, Integer digimonInvolveId) {
-        boolean invoVerify = involutionRepository.noRepeatInvolve(digimonId,digimonInvolveId);;
+        Boolean invoVerify = involutionRepository.noRepeatInvolve(digimonId, digimonInvolveId);
+
+        if (Objects.isNull(invoVerify)) {
+            invoVerify = true;
+        }
         return invoVerify;
     }
+
 }

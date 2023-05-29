@@ -2,6 +2,7 @@ package com.DIGIPEDIA.Digimon.Collection.exceptions.config;
 
 import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.ConflictException;
+import com.DIGIPEDIA.Digimon.Collection.exceptions.EvolveException;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,7 @@ public class ExceptionConfig {
 
     @ExceptionHandler({
             BadRequestException.class,
+            EvolveException.class,
             org.springframework.web.HttpRequestMethodNotSupportedException.class,
             org.springframework.web.bind.MissingRequestHeaderException.class,
             java.lang.StringIndexOutOfBoundsException.class,
@@ -86,6 +88,7 @@ public class ExceptionConfig {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(apiException);
     }
+
 
     @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

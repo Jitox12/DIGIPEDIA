@@ -2,6 +2,7 @@ package com.DIGIPEDIA.Digimon.Collection.dao;
 
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonEntity;
+import org.springframework.data.jpa.repository.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;

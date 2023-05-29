@@ -11,14 +11,17 @@ public interface EvolutionRepository extends JpaRepository<EvolutionEntity, Inte
     @Query("SELECT COUNT(e.digimonId) FROM EvolutionEntity e WHERE e.digimonId = ?1")
     Integer countEvolutions(Integer digimonId);
 
-    //@Query("SELECT COUNT(*) > 0 AS result FROM EvolutionEntity e, InvolutionEntity i WHERE (e.digimonId = ?1 AND e.digimonEvolvedId = ?2) And (e.digimonId = ?2 AND i.digimonInvolvedId = ?1) ")
-    @Query(" SELECT\n" +
-            "    CASE\n" +
-            "        WHEN EXISTS (SELECT 1 FROM EvolutionEntity e WHERE e.digimonId = ?1 AND e.digimonEvolvedId = ?2) THEN FALSE\n" +
-            "        WHEN EXISTS (SELECT 1 FROM InvolutionEntity i WHERE i.digimonId = ?1 AND i.digimonInvolvedId = ?2) THEN FALSE\n" +
-            "        ELSE TRUE\n" +
-            "    END AS resultado\n" +
-            "FROM EvolutionEntity")
-    Boolean noRepeatEvolve(Integer digimonId, Integer digimonEvolvedId);
+   /* @Query("SELECT COUNT(*) > 0 AS result " +
+            "FROM EvolutionEntity e, InvolutionEntity i " +
+            "WHERE (e.digimonId = ?1 AND e.digimonEvolvedId = ?2)" +
+            " And (e.digimonId = ?2 AND i.digimonInvolvedId = ?1) ")*/
+   @Query("SELECT \n" +
+           "\tCASE \n" +
+           "\t\tWHEN EXISTS (SELECT 1 FROM EvolutionEntity e Where e.digimonId= ?1 AND e.digimonEvolvedId = ?2) THEN TRUE \n" +
+           "\t\tWHEN EXISTS (SELECT 1 FROM InvolutionEntity i Where i.digimonId= ?2 AND i.digimonInvolvedId = ?2) THEN TRUE \n" +
+           "\tELSE FALSE \n" +
+           "END AS resultado \n" +
+           "FROM EvolutionEntity ")
+   Boolean noRepeatEvolve(Integer digimonId, Integer digimonEvolvedId);
 
 }
