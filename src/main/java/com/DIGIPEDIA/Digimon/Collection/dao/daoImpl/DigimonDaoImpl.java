@@ -69,6 +69,22 @@ public class DigimonDaoImpl implements DigimonDao {
 
     @Transactional
     @Override
+    public List<DigimonEntity> findEvolveDigimonList(Integer digimonId){
+        List<DigimonEntity> digimonEvolveList = digimonRepository.evolveDigimonList(digimonId);
+
+        return digimonEvolveList;
+    }
+
+    @Transactional
+    @Override
+    public List<DigimonEntity> findInvolveDigimonList(Integer digimonId){
+        List<DigimonEntity> digimonInvolveList = digimonRepository.involveDigimonList(digimonId);
+
+        return digimonInvolveList;
+    }
+
+    @Transactional
+    @Override
     public DigimonEntity findDigimonByNameDao(String digimonName) throws IOException {
         DigimonEntity digimon;
 

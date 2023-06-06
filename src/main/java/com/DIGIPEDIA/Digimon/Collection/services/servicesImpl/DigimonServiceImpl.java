@@ -2,6 +2,7 @@ package com.DIGIPEDIA.Digimon.Collection.services.servicesImpl;
 
 import com.DIGIPEDIA.Digimon.Collection.dao.DigimonDao;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.EvoInvoDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.entities.DigimonEntity;
@@ -31,15 +32,15 @@ public class DigimonServiceImpl implements DigimonService {
     @Override
     public void createDigimon(CDigimonDto cDigimonDto) {
 
-        if(Objects.isNull(cDigimonDto)){
+        if (Objects.isNull(cDigimonDto)) {
             throw new BadRequestException("CDigimonFamilyDto  is null");
         }
         String upperCaseDigimonName = FormatUtils.UpperCase(cDigimonDto.getDigimonNameDto());
         cDigimonDto.setDigimonNameDto(upperCaseDigimonName);
 
-        try{
+        try {
             digimonDao.createDigimonDao(cDigimonDto);
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -47,17 +48,22 @@ public class DigimonServiceImpl implements DigimonService {
 
     @Transactional
     @Override
-    public GADigimonDto findDigimonById(Integer digimonId) {
+    public EvoInvoDigimonDto findDigimonById(Integer digimonId) {
 
-        try{
-            GADigimonDto digimonDto;
-            DigimonEntity digimon;
+        try {
+            DigimonEntity digimon = digimonDao.findDigimonByIdDao(digimonId);
+            GADigimonDto digimonDto = digimonMapper.digimontoGADigimonDto(digimon);
 
-            digimon = digimonDao.findDigimonByIdDao(digimonId);
-            digimonDto = digimonMapper.digimontoGADigimonDto(digimon);
+            List<DigimonEntity> digimonEvolvedList = digimonDao.findEvolveDigimonList(digimonId);
+            List<DigimonEntity> digimonInvolvedList =  digimonDao.findInvolveDigimonList(digimonId);
 
-            return digimonDto;
-        }catch (IOException e){
+            List<GDigimonDto> digimonEvolvedListDto = digimonEvolvedList.stream().map(digimonMapper::digimontoGDigimonDto).collect(Collectors.toList());
+            List<GDigimonDto> digimonInvolvedListDto = digimonInvolvedList.stream().map(digimonMapper::digimontoGDigimonDto).collect(Collectors.toList());
+
+            EvoInvoDigimonDto fullDigimonDetails = digimonMapper.digimonEvolveListAndDigimonInvolveListAndDigimon(digimonEvolvedListDto, digimonDto, digimonInvolvedListDto);
+
+            return fullDigimonDetails;
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -65,7 +71,7 @@ public class DigimonServiceImpl implements DigimonService {
     @Override
     @Transactional
     public GADigimonDto findDigimonByName(String digimonName) {
-        try{
+        try {
             GADigimonDto digimonDto;
             DigimonEntity digimon;
 
@@ -73,14 +79,14 @@ public class DigimonServiceImpl implements DigimonService {
             digimonDto = digimonMapper.digimontoGADigimonDto(digimon);
 
             return digimonDto;
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public List<GDigimonDto> findAllDigimon() {
-        try{
+        try {
             List<GDigimonDto> digimonDtoList;
             List<DigimonEntity> digimonList;
 
@@ -88,7 +94,7 @@ public class DigimonServiceImpl implements DigimonService {
             digimonDtoList = digimonList.stream().map(digimonMapper::digimontoGDigimonDto).collect(Collectors.toList());
 
             return digimonDtoList;
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

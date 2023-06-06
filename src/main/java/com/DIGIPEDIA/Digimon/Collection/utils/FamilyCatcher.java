@@ -1,65 +1,26 @@
 package com.DIGIPEDIA.Digimon.Collection.utils;
 
+import com.DIGIPEDIA.Digimon.Collection.config.DigivolutionCodes;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+
+@Component
 public class FamilyCatcher {
 
-    public static boolean familyEvolvedCatcher(String digimonFamily, String digimonEvolvedFamily) {
-        boolean result = false;
+    private final DigivolutionCodes digivolutionCodes ;
 
-        switch (digimonFamily) {
-            case "Training 1":
-                result = (digimonEvolvedFamily.equals("Training_2")) ? true : false;
-                break;
-            case "Training 2":
-                result = (digimonEvolvedFamily.equals("Rookie")) ? true : false;
-                break;
-            case "Rookie":
-                result = (digimonEvolvedFamily.equals("Champion")) ? true : false;
-                break;
-            case "Champion":
-                result = (digimonEvolvedFamily.equals("Ultimate")) ? true : false;
-                break;
-            case "Ultimate":
-                result = (digimonEvolvedFamily.equals("Mega")) ? true : false;
-                break;
-            case "Mega":
-                result = (digimonEvolvedFamily.equals("Ultra")) ? true : false;
-                break;
-            case "Ultra":
-                result = false;
-                break;
-        }
-
-        return result;
+    public FamilyCatcher(DigivolutionCodes digivolutionCodes) {
+        this.digivolutionCodes = digivolutionCodes;
     }
 
-    public static boolean familyInvolvedCatcher(String digimonFamily, String digimonInvolvedFamily) {
-        boolean result = false;
-
-        switch (digimonFamily) {
-            case "Training 1":
-                result = false;
-                break;
-            case "Training 2":
-                result = (digimonInvolvedFamily.equals("Training")) ? true : false;
-                break;
-            case "Rookie":
-                result = (digimonInvolvedFamily.equals("Training_2")) ? true : false;
-                break;
-            case "Champion":
-                result = (digimonInvolvedFamily.equals("Rookie")) ? true : false;
-                break;
-            case "Ultimate":
-                result = (digimonInvolvedFamily.equals("Champion")) ? true : false;
-                break;
-            case "Mega":
-                result = (digimonInvolvedFamily.equals("Ultimate")) ? true : false;
-                break;
-            case "Ultra":
-                result = (digimonInvolvedFamily.equals("Mega")) ? true : false;
-                break;
-        }
-
-        return result;
+    public Boolean familyEvolvedCatcher(String digimonFamily, String digimonEvolvedFamily) {
+        String result = digivolutionCodes.getEvolution().get(digimonFamily);
+        return !Objects.isNull(result) && result.equalsIgnoreCase(digimonEvolvedFamily);
     }
 
+    public Boolean familyInvolvedCatcher(String digimonFamily, String digimonInvolvedFamily) {
+        String result = digivolutionCodes.getInvolution().get(digimonFamily);
+        return !Objects.isNull(result) && result.equalsIgnoreCase(digimonInvolvedFamily);
+    }
 }

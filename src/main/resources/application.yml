@@ -13,6 +13,27 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
   logging.level.root: DEBUG
-
 server:
   port: 8080
+
+digivolution:
+
+  involution:
+     Training_2: Training_1
+     Rookie: Training_2
+     Champion: Rookie
+     Ultimate: Champion
+     Mega: Ultimate
+     Ultra: Mega
+
+  evolution:
+     Training_1: Training_2
+     Training_2: Rookie
+     Rookie: Champion
+     Champion: Ultimate
+     Ultimate: Mega
+     Mega: Ultra
+
+
+
+

@@ -3,6 +3,7 @@ package com.DIGIPEDIA.Digimon.Collection.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,4 +23,5 @@ public class EvolutionEntity {
 
     @Column(name = "digimon_evolved_id")
     private Integer digimonEvolvedId;
+
 }

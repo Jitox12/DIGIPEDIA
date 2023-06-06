@@ -7,6 +7,7 @@ import com.DIGIPEDIA.Digimon.Collection.dto.evolutionDto.CEvolutionDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.involutionDto.CInvolutionDto;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.BadRequestException;
 import com.DIGIPEDIA.Digimon.Collection.exceptions.EvolveException;
+import com.DIGIPEDIA.Digimon.Collection.repositories.EvolutionRepository;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -14,6 +15,8 @@ import java.io.IOException;
 
 @Component
 public class EvoInvoDaoImpl implements EvoInvoDao {
+
+
     private final EvolutionDao evolutionDao;
     private final InvolutionDao involutionDao;
 
@@ -25,6 +28,7 @@ public class EvoInvoDaoImpl implements EvoInvoDao {
     @Override
     @Transactional
     public void EvoDao(CEvolutionDto evolutionDto) throws IOException {
+
         boolean evoVerify = evolutionDao.verifyEvolve(evolutionDto.getDigimonIdDto(), evolutionDto.getDigimonEvolvedIdDto());
         boolean invoVerify = involutionDao.verifyInvolve(evolutionDto.getDigimonIdDto(), evolutionDto.getDigimonEvolvedIdDto());
 

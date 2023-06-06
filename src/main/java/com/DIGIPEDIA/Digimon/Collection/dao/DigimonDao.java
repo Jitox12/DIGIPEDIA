@@ -10,8 +10,10 @@ import java.util.List;
 
 public interface DigimonDao {
 
-    public void createDigimonDao(CDigimonDto cDigimonDto) throws IOException;
-    public List<DigimonEntity> findAllDigimonDao() throws IOException;
-    public DigimonEntity findDigimonByIdDao(Integer digimonId) throws IOException;
-    public DigimonEntity findDigimonByNameDao(String digimonName) throws IOException;
+    void createDigimonDao(CDigimonDto cDigimonDto) throws IOException;
+    List<DigimonEntity> findAllDigimonDao() throws IOException;
+    DigimonEntity findDigimonByIdDao(Integer digimonId) throws IOException;
+    DigimonEntity findDigimonByNameDao(String digimonName) throws IOException;
+    List<DigimonEntity> findEvolveDigimonList(Integer digimonId) throws IOException;
+    List<DigimonEntity> findInvolveDigimonList(Integer digimonId) throws IOException;
 }

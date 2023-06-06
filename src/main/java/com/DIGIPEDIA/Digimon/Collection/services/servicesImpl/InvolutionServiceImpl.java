@@ -15,12 +15,14 @@ import java.io.IOException;
 @Service
 public class InvolutionServiceImpl implements InvolutionService {
 
+    private final FamilyCatcher familyCatcher;
     private final DigimonDao digimonDao;
     private final EvoInvoDao evoInvoDao;
 
-    public InvolutionServiceImpl(DigimonDao digimonDao, EvoInvoDao evoInvoDao) {
+    public InvolutionServiceImpl(DigimonDao digimonDao, EvoInvoDao evoInvoDao,FamilyCatcher familyCatcher) {
         this.digimonDao = digimonDao;
         this.evoInvoDao = evoInvoDao;
+        this.familyCatcher = familyCatcher;
     }
 
     @Transactional
@@ -30,8 +32,7 @@ public class InvolutionServiceImpl implements InvolutionService {
             DigimonEntity digimon = digimonDao.findDigimonByIdDao(involutionDto.getDigimonIdDto());
             DigimonEntity involvedDigimon = digimonDao.findDigimonByIdDao(involutionDto.getDigimonInvolvedIdDto());
 
-            boolean familyResponse =  FamilyCatcher.familyInvolvedCatcher(digimon.getDigimon_family().getDigimonFamilyName()
-                    ,involvedDigimon.getDigimon_family().getDigimonFamilyName());
+            Boolean familyResponse = familyCatcher.familyInvolvedCatcher(digimon.getDigimon_family().getDigimonFamilyName(), involvedDigimon.getDigimon_family().getDigimonFamilyName());
 
             if(!familyResponse){
                 throw new EvolveException("it is necessary to a inferior family to involve");

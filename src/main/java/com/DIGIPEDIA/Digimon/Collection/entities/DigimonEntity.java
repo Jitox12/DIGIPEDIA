@@ -49,4 +49,5 @@ public class DigimonEntity {
     @ManyToOne
     @JoinColumn(name = "digimon_type_attribute_id",insertable = false, updatable = false)
     private DigimonTypeAttributeEntity digimon_type_attribute;
+
 }

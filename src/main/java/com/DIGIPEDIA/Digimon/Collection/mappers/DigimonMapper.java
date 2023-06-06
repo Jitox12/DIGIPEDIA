@@ -1,5 +1,6 @@
 package com.DIGIPEDIA.Digimon.Collection.mappers;
 
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.EvoInvoDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonTypeAttributeDto.GDigimonTypeAttributeDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
@@ -12,6 +13,8 @@ import com.DIGIPEDIA.Digimon.Collection.entities.SkillEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper(componentModel = "Spring")
 public interface DigimonMapper {
@@ -55,4 +58,11 @@ DigimonTypeAttributeMapper DIGIMON_TYPE_ATTRIBUTE_MAPPER = Mappers.getMapper(Dig
     @Mapping(source = "digimon_family", target = "digimonFamilyDto")
     @Mapping(source = "digimon_type_attribute", target = "digimonTypeAttributeDto")
     GDigimonDto digimontoGDigimonDto(DigimonEntity digimon);
+
+    @Mapping(source = "digimonDto", target = "digimonDto")
+    @Mapping(source = "digimonEvolveListDto", target = "digimonEvolveListDto")
+    @Mapping(source = "digimonInvolveListDto", target = "digimonInvolveListDto")
+    EvoInvoDigimonDto digimonEvolveListAndDigimonInvolveListAndDigimon(List<GDigimonDto> digimonEvolveListDto,
+                                                                       GADigimonDto digimonDto,
+                                                                       List<GDigimonDto> digimonInvolveListDto);
 }

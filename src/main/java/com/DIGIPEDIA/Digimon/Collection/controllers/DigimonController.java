@@ -1,6 +1,7 @@
 package com.DIGIPEDIA.Digimon.Collection.controllers;
 
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.CDigimonDto;
+import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.EvoInvoDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GADigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.dto.digimonDto.GDigimonDto;
 import com.DIGIPEDIA.Digimon.Collection.services.DigimonService;
@@ -21,8 +22,8 @@ public class DigimonController {
     }
 
     @GetMapping(value = "/findbyid/{digimonId}")
-    public GADigimonDto findDigimonByIdController(@PathVariable Integer digimonId){
-        GADigimonDto digimonDto;
+    public EvoInvoDigimonDto findDigimonByIdController(@PathVariable Integer digimonId){
+        EvoInvoDigimonDto digimonDto;
         digimonDto = digimonService.findDigimonById(digimonId);
 
         return digimonDto;

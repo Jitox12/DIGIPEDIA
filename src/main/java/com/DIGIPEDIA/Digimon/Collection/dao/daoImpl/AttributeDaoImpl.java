@@ -17,10 +17,9 @@ public class AttributeDaoImpl implements AttributeDao {
 
     private final AttributeRepository attributeRepository;
 
-    public AttributeDaoImpl(AttributeRepository attributeRepository) {
+    public AttributeDaoImpl( AttributeRepository attributeRepository) {
         this.attributeRepository = attributeRepository;
     }
-
 
     @Override
     public void createAttributeDao(CAttributeDto cAttributeDto) throws IOException {

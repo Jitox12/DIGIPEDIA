@@ -17,10 +17,12 @@ public class EvolutionServiceImpl implements EvolutionService {
 
     private final EvoInvoDao evoInvoDao;
     private final DigimonDao digimonDao;
+    private final FamilyCatcher familyCatcher;
 
-    public EvolutionServiceImpl(EvoInvoDao evoInvoDao, DigimonDao digimonDao) {
+    public EvolutionServiceImpl(EvoInvoDao evoInvoDao, DigimonDao digimonDao, FamilyCatcher familyCatcher) {
         this.evoInvoDao = evoInvoDao;
         this.digimonDao = digimonDao;
+        this.familyCatcher = familyCatcher;
     }
 
     @Transactional
@@ -30,7 +32,7 @@ public class EvolutionServiceImpl implements EvolutionService {
             DigimonEntity digimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonIdDto());
             DigimonEntity evolvedDigimon = digimonDao.findDigimonByIdDao(evolutionDto.getDigimonEvolvedIdDto());
 
-          boolean familyResponse =  FamilyCatcher.familyEvolvedCatcher(digimon.getDigimon_family().getDigimonFamilyName(),evolvedDigimon.getDigimon_family().getDigimonFamilyName());
+          Boolean familyResponse =  familyCatcher.familyEvolvedCatcher(digimon.getDigimon_family().getDigimonFamilyName(),evolvedDigimon.getDigimon_family().getDigimonFamilyName());
 
           if(!familyResponse){
             throw new EvolveException("it is necessary to a superior family to evolve");
