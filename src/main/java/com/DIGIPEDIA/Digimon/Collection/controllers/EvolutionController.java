@@ -4,13 +4,12 @@ import com.DIGIPEDIA.Digimon.Collection.dto.evolutionDto.CEvolutionDto;
 import com.DIGIPEDIA.Digimon.Collection.services.EvolutionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/evolution")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+
 public class EvolutionController {
 
     private final EvolutionService evolutionService;

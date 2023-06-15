@@ -12,6 +12,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/digimonfamily")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+
 public class DigimonFamilyController {
 
     private final DigimonFamilyService digimonFamilyService;

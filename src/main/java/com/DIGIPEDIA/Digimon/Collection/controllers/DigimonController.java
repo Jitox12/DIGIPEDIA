@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/digimon")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+
 public class DigimonController {
 
     private final DigimonService digimonService;
@@ -51,9 +53,4 @@ public class DigimonController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("DIGIMON CREATED");
     }
-
-
-
-
-
 }
